@@ -38,7 +38,7 @@ const Home = () => {
        
     
     return (
-        <div className=' max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1000px] sm:flex  '>
+        <div className=' max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1280px] sm:flex  '>
              <div className={MenuOpen ? " z-20 w-[300px]  sm:mr-10 border-l   border-[#F1F6FC] " :"hidden relative sm:block" }>
              <div className='hidden sm:flex mt-8 w-[250px] h-[53px]'>
                     <div className='w-full mr-10'>
@@ -105,21 +105,18 @@ const Home = () => {
       </div>
       <div className={ showLocation ?"bg-white justify-between w-[320px] sm:w-[420px] h-[500px] flex border border-[#C2C7CC] rounded-[10px]":"hidden" }>
         <div className='text-[17px] text-[#003666] mr-4 sm:pr-10 pt-6 flex flex-col gap-5'>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation('هتل ')}>هتل </l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation('هتل آپارتمان ')}>هتل آپارتمان </l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' متل')}> متل</l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' سوییت')}>سوییت </l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' ویلا')}> ویلا</l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' پلاژ')}> پلاژ</l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation('مهمان پذیر ')}> مهمان پذیر</l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' مسافرخانه')}>مسافرخانه </l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' مهمان سرا')}> مهمان سرا</l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation('بومگردی ')}>بومگردی </l1> 
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' پانسیون')}> پانسیون</l1>
-          <l1 className="text-[14px]" onClick={() =>handlerLocation(' واحد اقامتی')}> واحد اقامتی</l1>
-
-          
-         
+          <li className="text-[14px]" onClick={() =>handlerLocation('هتل ')}>هتل </li>
+          <li className="text-[14px]" onClick={() =>handlerLocation('هتل آپارتمان ')}>هتل آپارتمان </li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' متل')}> متل</li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' سوییت')}>سوییت </li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' ویلا')}> ویلا</li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' پلاژ')}> پلاژ</li>
+          <li className="text-[14px]" onClick={() =>handlerLocation('مهمان پذیر ')}> مهمان پذیر</li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' مسافرخانه')}>مسافرخانه </li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' مهمان سرا')}> مهمان سرا</li>
+          <li className="text-[14px]" onClick={() =>handlerLocation('بومگردی ')}>بومگردی </li> 
+          <li className="text-[14px]" onClick={() =>handlerLocation(' پانسیون')}> پانسیون</li>
+          <li className="text-[14px]" onClick={() =>handlerLocation(' واحد اقامتی')}> واحد اقامتی</li>
         </div>
       </div>
     </div>
@@ -139,10 +136,11 @@ const Home = () => {
       </div>
       <div className={ showMenu ?"bg-white justify-between w-[320px] sm:w-[420px] h-[450px] flex border border-[#C2C7CC] rounded-[10px]":"hidden" }>
         <div className='text-[17px] text-[#003666] mr-4 sm:pr-10 pt-6 flex flex-col gap-5'>
-          <l1 onClick={() => handleItemClick('پنج ستاره')}>پنج ستاره</l1>
-          <l1 onClick={() => handleItemClick('چهار ستاره')}>چهار ستاره</l1>
-          <l1 onClick={() => handleItemClick('سه ستاره')}>سه ستاره</l1>
-          {/* Add similar onClick handlers for other list items */}
+          <li onClick={() => handleItemClick('پنج ستاره')}>پنج ستاره</li>
+          <li onClick={() => handleItemClick('چهار ستاره')}>چهار ستاره</li>
+          <li onClick={() => handleItemClick('سه ستاره')}>سه ستاره</li>
+          <li onClick={() => handleItemClick('سه ستاره')}>سه ستاره</li>
+          
         </div>
         <div className='mt-6 ml-3'>
                         <span >

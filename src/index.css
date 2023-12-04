@@ -17,3 +17,12 @@
     }
   }
 }
+body{
+  font-family: "Light";
+  overflow-x: hidden;
+  touch-action: none;
+}
+@font-face {
+  font-family: "Light";   
+  src:url("./font/IRANSansX-Medium.woff") format("truetype");
+}
