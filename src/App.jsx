@@ -1,9 +1,12 @@
 import React from 'react';
+import Home from './page/Home';
+// import Setting from './page/setting';
 
 const App = () => {
   return (
     <div>
-      <h3 className='bg-red-400'>mahtab moradi</h3>
+      <Home/>
+      {/* <Setting/> */}
     </div>
   );
 };
