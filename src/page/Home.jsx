@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import search from '../image/search-normal.svg';
 import icon from '../image/icon.svg';
 import map from "../image/map.svg"
 import logo from "../image/logo.svg"
-// import Sidebar from '../../components/Sidebar/Sidebar';
-// import SearchBox from '../../components/serchbox/SearchBox'
 import ColorBox from '../components/colorbox/ColorBox';
 import SideBar from '../components/sidebar/SideBar';
 import NeshanM from '../components/map/NeshanM';
 import SearchBox from '../components/searchbox/SearchBox';
 import ClockBox from '../components/clockbox/ClockBox';
+import axios from 'axios';
+import Cookies from 'universal-cookie';
+import locations from '../data';
+import Degree from "../data"
 
 const Home = () => {
     const[MenuOpen,setMenuOpen]=useState(false)
@@ -31,9 +33,61 @@ const Home = () => {
             setLocation(item);
         }
      const [selectedItem, setSelectedItem] = useState('');
-    const handleItemClick = (item) => {
+      const handleItemClick = (item) => {
           setSelectedItem(item);
         }
+        // fetchdata
+        const cookies = new Cookies();
+        const login_token = cookies.get('token');
+        console.log(login_token);  //Token 66e06187ad133ace0ccf18f6cf5ed2b7d05dcc27
+        const [userData,setUserData]=useState(
+          {name_of_residence:""},
+          {type_residence: ""},
+          {degree_residence:""},
+          {state:""},
+          {city:""},
+          {address:""},
+          {phone_number:""},
+          {mobile_phone_number:""},
+          {website_address:""},
+          {room_delivery_time:""},
+          {construction_date:""},
+          {floor_count:""},
+          {Language:""}
+          );
+          useEffect(()=>{
+            const fetchData=async()=>{
+              try{
+                const response= await axios.get("https://backendrahad.pythonanywhere.com/ResidenceInfoCompletionView/",{
+                  headers:{
+                    "Content-Type":'application/json',
+                    Authorization:login_token
+                }
+                })
+                if(response.data){
+                  setUserData(
+                    {name_of_residence:response.data.name_of_residence,
+                    type_residence:response.data.type_residence,
+                    degree_residence:response.data.degree_residence,
+                    state:response.data.state,
+                    city:response.data.city,
+                    address:response.data.address,
+                    phone_number:response.data.phone_number,
+                    mobile_phone_number:response.data.mobile_phone_number,
+                    website_address:response.data.website_address,
+                    room_delivery_time:response.data.room_delivery_time,
+                    construction_date:response.data.construction_date,
+                    floor_count:response.data.floor_count,
+                    Language:response.data.Language}
+                  )
+                }
+                // console.log(response.data.address);
+              } catch(error){
+                console.log(error);
+              }
+            }
+            fetchData()
+          },[])
 
        
     
@@ -79,14 +133,22 @@ const Home = () => {
              {/* search and setting */}
 
              <SearchBox/>
+             {/* foooorm */}
+
              <form className='flex flex-col sm:mr-[50px] -mr-8 sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto'>
                 <div className='w-[320px] h-[86px]'>
                     <label className='text-[#003666] text-[16px] font-medium mr-2'>نام اقامتگاه</label>
-                    <input type='text'placeholder='نام خود را وارد کنید' className='w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+                    <input 
+                    value={userData.name_of_residence}
+                    onChange={(e)=>setUserData({...userData,name_of_residence:e.target.value})}
+                    type='text'placeholder='نام خود را وارد کنید' className='w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
                 </div>
                 <div className='w-[320px] h-[86px]'>
                     <label className='text-[#003666] text-[16px] font-medium mr-2'> آدرس وبسایت</label>
-                    <input type='text'placeholder="لینک آدرس وبسایت خود را وارد نمایید ."className='w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+                    <input
+                    value={userData.website_address}
+                    onChange={(e)=>setUserData({...userData,website_address:e.target.value})}
+                     type='text'placeholder="لینک آدرس وبسایت خود را وارد نمایید ."className='w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
                 </div>
 
           
@@ -103,23 +165,17 @@ const Home = () => {
           <path d="M1.35352 1.41699L8.38281 8.44629L15.4121 1.41699" stroke="#A2AFB8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
-      <div className={ showLocation ?"bg-white justify-between w-[320px] sm:w-[420px] h-[500px] flex border border-[#C2C7CC] rounded-[10px]":"hidden" }>
-        <div className='text-[17px] text-[#003666] mr-4 sm:pr-10 pt-6 flex flex-col gap-5'>
-          <li className="text-[14px]" onClick={() =>handlerLocation('هتل ')}>هتل </li>
-          <li className="text-[14px]" onClick={() =>handlerLocation('هتل آپارتمان ')}>هتل آپارتمان </li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' متل')}> متل</li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' سوییت')}>سوییت </li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' ویلا')}> ویلا</li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' پلاژ')}> پلاژ</li>
-          <li className="text-[14px]" onClick={() =>handlerLocation('مهمان پذیر ')}> مهمان پذیر</li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' مسافرخانه')}>مسافرخانه </li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' مهمان سرا')}> مهمان سرا</li>
-          <li className="text-[14px]" onClick={() =>handlerLocation('بومگردی ')}>بومگردی </li> 
-          <li className="text-[14px]" onClick={() =>handlerLocation(' پانسیون')}> پانسیون</li>
-          <li className="text-[14px]" onClick={() =>handlerLocation(' واحد اقامتی')}> واحد اقامتی</li>
+      <div className={ showLocation ?"bg-white w-[320px] sm:w-[420px] h-[510px]  border border-[#C2C7CC] rounded-[10px]":"hidden" }>
+        <div className='text-[17px] text-[#003666]   pt-6 flex flex-col'>
+         {
+          locations.map(item=>(
+             <li key={item.id} className="text-[14px] pr-4 w-full py-2.5  cursor-pointer hover:bg-[#C2C7CC]" onClick={() =>handlerLocation(item.Name)}>{item.Name}</li>
+
+          ))
+         }
         </div>
       </div>
-    </div>
+            </div>
 
     <div className='w-[320px] h-[86px] relative group '>
       <label className='text-[#003666] text-[16px] font-medium mr-2'>درجه اقامتگاه</label>
@@ -136,10 +192,14 @@ const Home = () => {
       </div>
       <div className={ showMenu ?"bg-white justify-between w-[320px] sm:w-[420px] h-[450px] flex border border-[#C2C7CC] rounded-[10px]":"hidden" }>
         <div className='text-[17px] text-[#003666] mr-4 sm:pr-10 pt-6 flex flex-col gap-5'>
-          <li onClick={() => handleItemClick('پنج ستاره')}>پنج ستاره</li>
-          <li onClick={() => handleItemClick('چهار ستاره')}>چهار ستاره</li>
-          <li onClick={() => handleItemClick('سه ستاره')}>سه ستاره</li>
-          <li onClick={() => handleItemClick('سه ستاره')}>سه ستاره</li>
+          
+          {
+            Degree.map(item=>(
+              <li key={item.id} className='cursor-pointer' onClick={() => handleItemClick(item.Name)}>{item.Name}</li>
+
+            ))
+          }
+         
           
         </div>
         <div className='mt-6 ml-3'>
@@ -216,11 +276,18 @@ const Home = () => {
              
                 <div className='w-[320px] h-[86px]'>
                     <label className='text-[#003666] text-[16px] font-medium mr-2'>سال ساخت </label>
-                    <input type='text'placeholder='تاریخ مورد نظر خود را وارد نمایید' className='w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+                    <input 
+                    value={userData.construction_date}
+                    onChange={(e)=>setUserData({...userData,construction_date:e.target.value})}
+                    type='text'placeholder='تاریخ مورد نظر خود را وارد نمایید' className='w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
                 </div>
                 <div className='w-[320px] h-[86px]'>
                     <label className='text-[#003666] text-[16px] font-medium mr-2'>تعدادطبقات </label>
-                    <input type='text'placeholder=' تعداد طبقات اقامتگاه خود را وارد نمایید' className='w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+                    <input 
+                    value={userData.floor_count}
+                    onChange={(e)=>setUserData(...userData,)}
+
+                    type='text'placeholder=' تعداد طبقات اقامتگاه خود را وارد نمایید' className='w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
                 </div>
              </form>
              {/* ساعت تحویل و تخلیه */}
@@ -239,18 +306,27 @@ const Home = () => {
                 <div className='sm:flex sm:w-[920px] gap-[195px]'>
                 <div className='w-[320px] h-[86px] my-2'>
                     <label className='text-[#003666] text-[16px] font-medium mr-2'>استان </label>
-                    <input type='text'placeholder='  لظفا نام استان خود را وارد نمایید' className='w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+                    <input 
+                    value={userData.state}
+                    onChange={(e)=>setUserData({...userData,state:e.target.value})}
+                    type='text'placeholder='  لظفا نام استان خود را وارد نمایید' className='w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
                 </div>
                 <div className='w-[320px] h-[86px] my-2'>
                     <label className='text-[#003666] text-[16px] font-medium mr-2'>شهرستان </label>
-                    <input type='text'placeholder='لظفا نام شهرستان خود را وارد نمایید' className='w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+                    <input 
+                    value={userData.city}
+                    onChange={(e)=>setUserData({...userData,city:e.target.value})}
+                    type='text'placeholder='لظفا نام شهرستان خود را وارد نمایید' className='w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
                 </div>
                 </div>
                 <div >
                 <div className='w-[320px] h-[152px] flex items-center justify-center  '>
               <div >
               <label className='text-[#003666] text-[16px] font-medium mr-2'>آدرس </label>
-              <textarea type='text' className='w-[320px]  sm:w-[920px] mt-2 h-[120px] sm:h-[52px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none'/>
+              <textarea
+              value={userData.address}
+              onChange={(e)=>setUserData({...userData,address:e.target.value})}
+               type='text' className='w-[320px] pr-8 py-2 sm:w-[920px] mt-2 h-[120px] sm:h-[52px] border text-[14px] border-[#C2C7CC] rounded-[10px] outline-none'/>
               </div>
                 </div>
                 </div>
@@ -262,7 +338,10 @@ const Home = () => {
                 <div className='w-[320px] sm:w-[420px] h-[85px] m-auto flex gap-2 my-8'>
                     <div>
                         <label className='text-[#003666]  text-[15px] mr-2'>شماره تماس</label>
-                        <input type='tel' placeholder='.شماره تماس اقامتگاه خود را وارد نمایید ' className=' px-2  mt-2 placeholder:pl-24 text-[12px]  w-[233px] h-[52px] sm:w-[313px] outline-none border border-[#C2C7CC] rounded-[10px]'/>
+                        <input
+                        value={userData.phone_number}
+                        onChange={(e)=>setUserData({...userData,phone_number:e.target.value})}
+                        type='tel' placeholder='.شماره تماس اقامتگاه خود را وارد نمایید ' className=' px-2  mt-2 placeholder:pl-24 placeholder:text-[16px] text-[17px]  w-[233px] h-[52px] sm:w-[313px] outline-none border border-[#C2C7CC] rounded-[10px]'/>
                     </div>
                     <div>
                         <label className='text-[#003666] text-[15px]  mr-2' >کدشهر</label>
@@ -273,7 +352,10 @@ const Home = () => {
                 <div className='w-[320px] sm:w-[420px] h-[85px] m-auto flex gap-2 my-8'>
                     <div>
                         <label className='text-[#003666] text-[15px]  mr-2'> شماره تلفن همراه</label>
-                        <input type='tel' placeholder='.لظفا شماره همراه خود را وارد نمایید ' className='text-[12px] px-2 placeholder:pl-28 w-[233px]  mt-2 sm:w-[313px] h-[52px] outline-none border border-[#C2C7CC] rounded-[10px]'/>
+                        <input
+                        value={userData.mobile_phone_number}
+                        onChange={(e)=>setUserData({...userData,mobile_phone_number:e.target.value})}
+                         type='tel' placeholder='.لظفا شماره همراه خود را وارد نمایید ' className='placeholder:text-[16px] text-[17px] px-2 placeholder:pl-28 w-[233px]  mt-2 sm:w-[313px] h-[52px] outline-none border border-[#C2C7CC] rounded-[10px]'/>
                     </div>
                     <div>
                         <label className='text-[#003666] text-[15px]  mr-2' >کدکشور</label>

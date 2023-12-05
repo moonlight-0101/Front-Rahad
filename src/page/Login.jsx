@@ -5,7 +5,11 @@ import avatar from '../image/avatar.svg'
 import hidden from '../image/hidden pass.svg'
 import axios from "axios"
 import Cookies from "universal-cookie"
+// import {  } from "react-router-dom"
+// import {useHistory} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+    const navigateTo = useNavigate();
     const [UserName,setUsername]=useState('')
     const [errorBorder,setErrorBorder]=useState(true)
     const [Password,setPassword]=useState('')
@@ -32,17 +36,16 @@ const Login = () => {
             const response= await axios.post("https://backendrahad.pythonanywhere.com/Login/",{
                 UserName,
                 Password
-            },{
-                headers:{
+            },  {headers:{
                 "Content-Type":'application/json'
-        }
+            }
     })
     if(response.status===200){
         const tokens=response.data
         const token=tokens.data.Authorization
         const cookie=new Cookies()
         cookie.set("token",token)
-        console.log("bodvi an",token);
+        navigateTo('/home')
     }
         }catch(error){
             console.log("ارور:  ", error);
@@ -74,10 +77,10 @@ const Login = () => {
                             className={`border ${errorBorder ?"border-[##C2C7CC]":"border-red-500"}
                              border-[##C2C7CC] outline-none  
                              mt-1 w-[320px] sm:w-[420px] h-[52px]
-                              rounded-[10px] text-[12px] pr-8 text-[#A2AFB8]`} placeholder='نام خود را وارد نمایید' />
+                              rounded-[10px] placeholder:text-[12px] text-[16px] pr-8 placeholder:text-[#A2AFB8]`} placeholder='نام خود را وارد نمایید' />
                             <img src={avatar} className='  top-10 left-4 absolute'/>
                         </div>
-                        <p className={` ${errorBorder ?"block":"block"} text-[#FB2047] w-[200px]  mt-1 sm:mr-4 mr-10 text-[12px]`}>نام کاربری یا رمز عبور اشتباه است</p>
+                        <p className={` ${errorBorder ?"hidden":"block"} text-[#FB2047] w-[200px]  mt-1 sm:mr-4 mr-10 text-[12px]`}>نام کاربری یا رمز عبور اشتباه است</p>
 
                         <div className=' w-[320px] sm:w-[420px] h-[85px] mt-10 sm:mt-6 relative m-auto'>
                             <label className='text-[16px] text-[#003666] mr-4'> رمز عبور</label>
@@ -88,11 +91,11 @@ const Login = () => {
                             className={`border ${errorBorder ?"border-[##C2C7CC]":"border-red-500"}
                             border-[##C2C7CC] outline-none  
                             mt-1 w-[320px] sm:w-[420px] h-[52px]
-                             rounded-[10px] text-[12px] pr-8 text-[#A2AFB8]`}
+                             rounded-[10px] placeholder:text-[12px] text-[16px] pr-8 placeholder:text-[#A2AFB8]`}
                             placeholder='رمزعبور را وارد نمایید' />
                             <img src={icon} onClick={handleToggle} className='  top-10 left-4 absolute'/>
                             <div>
-                                <p className={` ${errorBorder ?"block":"block"} text-[#FB2047] w-[200px]  mt-1 mr-2 text-[12px]`}>نام کاربری یا رمز عبور اشتباه است</p>
+                                <p className={` ${errorBorder ?"hidden":"block"} text-[#FB2047] w-[200px]  mt-1 mr-2 text-[12px]`}>نام کاربری یا رمز عبور اشتباه است</p>
                                 <p className='text-[#00519A] -mt-1 text-[16px] sm:mr-[280px] mr-[200px]'>فراموشی رمز عبور</p>
                             </div>
                         </div>

@@ -22,7 +22,8 @@ const handelInputChange=(event)=>{
     return (
         <div className='w-[320px] sm:w-[420px] rounded-[9px] p-[10px] flex flex-row-reverse items-center gap-5 justify-center  border border-[rgb(162,175,184)]'>
         <div>
-        <input onChange={handelInputChange} placeholder='12' className='w-[92px] rounded-sm h-[57px] border border-black/10 mb-1 mt-4  text-[34px] pr-6 outline-none focus:text-[#003666] hover:bg-[#F3F4F8]' value={inputValue}/>
+        <input 
+        onChange={handelInputChange} placeholder='12' className='w-[92px] rounded-sm h-[57px] border border-black/10 mb-1 mt-4  text-[34px] pr-6 outline-none focus:text-[#003666] hover:bg-[#F3F4F8]' value={inputValue}/>
         <div className=' text-left ml-2 text-[#49454F] text-[12px]'>ساعت</div>
         </div>
         <div>

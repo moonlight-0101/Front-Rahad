@@ -1,14 +1,14 @@
 import React from 'react';
-// import Home from './page/Home';
-// import Setting from './page/setting';
-import Login from './page/Login';
+
+import { useRoutes } from 'react-router-dom';
+import routes from './routes';
 
 const App = () => {
+  const router=useRoutes(routes)
   return (
     <div>
-      {/* <Home/> */}
-      {/* <Setting/> */}
-      <Login/>
+      
+      <div>{router}</div>
     </div>
   );
 };
