@@ -27,3 +27,43 @@ body{
   font-family: "Light";   
   src:url("./font/IRANSansX-Medium.woff") format("truetype");
 }
+/* .custom-checkbox input[type='checkbox'] {
+  display: none;
+} */
+
+/*  */
+
+
+/* input[type=checkbox] {
+  transform: scale(1.5);
+} */
+
+input[type=checkbox] {
+  font-size: 14px;
+  visibility: hidden;
+}
+
+input[type=checkbox]:after,
+input[type=checkbox]::after {
+  content: " ";
+  background-color: #fff;
+  display:flex;
+  justify-items: center;
+  align-items: center;
+  color: #239380;
+  width: 20px;
+  height: 20px;
+  visibility: visible;
+  border: 1px solid #2393B0;
+  border-radius: 5px;
+ 
+
+}
+
+input[type=checkbox]:checked:after,
+input[type=checkbox]:checked::after {
+  content: "\2714";
+  padding: -5px;
+  font-weight: bold;
+  padding-right: 3px;
+}

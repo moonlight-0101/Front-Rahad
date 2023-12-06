@@ -2,7 +2,7 @@ import React from 'react';
 
 const SideBar = () => {
     return (
-        <div className='flex flex-col mr-10 gap-4 z-40 width-[400px]  sm:static absolute top-[50px] left-[220px]'>
+        <div className='flex flex-col bg-white mr-10 gap-4 z-40 width-[400px]  sm:static absolute top-[50px] left-[220px]'>
                     <div className='flex gap-10 items-center justify-center mt-20   group  h-[70px] transition-al duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]'>
                     <span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
