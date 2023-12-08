@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import search from "../image/search-normal.svg";
 import icon from "../image/icon.svg";
 import map from "../image/map.svg";
@@ -10,16 +10,21 @@ import SearchBox from "../components/searchbox/SearchBox";
 import ClockBox from "../components/clockbox/ClockBox";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import {locations} from "../data";
-import {Degree} from "../data";
+import { locations } from "../data";
+import { Degree } from "../data";
 import Menu from "../components/menu/Menu";
 import Label from "../components/searchbox/label";
 import Button from "../components/button/Button";
+// import { ValueContext } from "../context/InputValue";
 // import Menu from "../components/menu/Menu";
 
 const Home = () => {
+  // const {userData,setUserData} =useContext(ValueContext)
+
+  const [loading, setLoading] = useState(true);
   // fetchdata
   const cookies = new Cookies();
+  const [error, setError] = useState(null);
   const login_token = cookies.get("token");
   console.log(login_token); //Token 66e06187ad133ace0ccf18f6cf5ed2b7d05dcc27
   const [userData, setUserData] = useState({
@@ -33,6 +38,7 @@ const Home = () => {
     mobile_phone_number: "",
     website_address: "",
     room_delivery_time: "",
+    room_checkout_time: "",
     construction_date: "",
     floor_count: "",
     Language: "",
@@ -67,18 +73,32 @@ const Home = () => {
           });
           console.log("response.data", response.data);
         }
-        // console.log(response.data.address);
       } catch (error) {
-        console.log(error);
+        setError("متاسفانه خطا در دریافت اطلاعات رخ داده است");
       }
     };
     fetchData();
   }, []);
 
-  // const [MenuOpen, setMenuOpen] = useState(false);
-  // const handlerButtonClick = () => {
-  //   setMenuOpen(!MenuOpen);
-  // };
+  //  postdata
+
+  const handleFormSubmit = async () => {
+    try {
+      const response = await post(
+        "https://backendrahad.pythonanywhere.com/ResidenceInfoCompletionView/",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: login_token,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      setError("در ارسال اطلاعات مشکلی رخ داده است");
+    }
+  };
 
   const [showMenu, setShowMenu] = useState(false);
   const handlerIconClick = () => {
@@ -99,44 +119,56 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setSelectedItem(Degree.filter((item) => item.id === userData.degree_residence).at(0));
-    setLocation(locations.filter((item) => item.id === userData.type_residence).at(0));
+    setSelectedItem(
+      Degree.filter((item) => item.id === userData.degree_residence).at(0)
+    );
+    setLocation(
+      locations.filter((item) => item.id === userData.type_residence).at(0)
+    );
   }, [userData]);
 
-  console.log("selectedItem", selectedItem);
+  // console.log("selectedItem", selectedItem);
 
   return (
     <div className=" max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1280px] sm:flex  ">
-        <Menu/>
+      <Menu />
       <div className="  sm:mr-4 sm:w-[950px] ">
-     
-          <ColorBox />
+        <ColorBox />
         {/* colorbox */}
 
         {/* search and setting */}
-        <div className='flex items-center  sm:justify-between'>
-          <Label/>
-        <SearchBox />
+        <div className="flex items-center  sm:justify-between">
+          <Label />
+          <SearchBox />
         </div>
 
         {/* foooorm */}
 
         <form className="flex flex-col sm:mr-[50px] -mr-8 sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
-          <div className="w-[320px] h-[86px]">
-            <label className="text-[#003666] text-[16px] font-medium mr-2">نام اقامتگاه</label>
+           <div className="w-[320px] h-[86px]">
+            <label className="text-[#003666] text-[16px] font-medium mr-2">
+              نام اقامتگاه
+            </label>
             <input
               value={userData.name_of_residence}
-              onChange={(e) => setUserData({ ...userData, name_of_residence: e.target.value })}
+              onChange={(e) =>
+                setUserData({ ...userData, name_of_residence: e.target.value })
+              }
               type="text"
               placeholder="نام خود را وارد کنید"
               className="w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
           </div>
           <div className="w-[320px] h-[86px]">
-            <label className="text-[#003666] text-[16px] font-medium mr-2"> آدرس وبسایت</label>
+            <label className="text-[#003666] text-[16px] font-medium mr-2">
+              {" "}
+              آدرس وبسایت
+            </label>
             <input
               value={userData.website_address}
-              onChange={(e) => setUserData({ ...userData, website_address: e.target.value })}
+              onChange={(e) =>
+                setUserData({ ...userData, website_address: e.target.value })
+              }
               type="text"
               placeholder="لینک آدرس وبسایت خود را وارد نمایید ."
               className="w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
@@ -144,7 +176,10 @@ const Home = () => {
           </div>
 
           <div className="w-[320px] h-[86px] relative group z-10 ">
-            <label className="text-[#003666] text-[16px] font-medium mr-2"> نوع اقامتگاه</label>
+            <label className="text-[#003666] text-[16px] font-medium mr-2">
+              {" "}
+              نوع اقامتگاه
+            </label>
             <input
               type="text"
               placeholder="  انتخاب  کنید"
@@ -196,7 +231,9 @@ const Home = () => {
           </div>
 
           <div className="w-[320px] h-[86px] relative group ">
-            <label className="text-[#003666] text-[16px] font-medium mr-2">درجه اقامتگاه</label>
+            <label className="text-[#003666] text-[16px] font-medium mr-2">
+              درجه اقامتگاه
+            </label>
             <input
               type="text"
               placeholder="  انتخاب  کنید"
@@ -235,7 +272,11 @@ const Home = () => {
             >
               <div className="text-[17px] text-[#003666] mr-4 sm:pr-10 pt-6 flex flex-col gap-5">
                 {Degree.map((item) => (
-                  <li key={item.id} className="cursor-pointer" onClick={() => handleItemClick(item)}>
+                  <li
+                    key={item.id}
+                    className="cursor-pointer"
+                    onClick={() => handleItemClick(item)}
+                  >
                     {item.Name}
                   </li>
                 ))}
@@ -492,17 +533,23 @@ const Home = () => {
           </div>
 
           <div className="w-[320px] h-[86px]">
-            <label className="text-[#003666] text-[16px] font-medium mr-2">سال ساخت </label>
+            <label className="text-[#003666] text-[16px] font-medium mr-2">
+              سال ساخت{" "}
+            </label>
             <input
               value={userData.construction_date}
-              onChange={(e) => setUserData({ ...userData, construction_date: e.target.value })}
+              onChange={(e) =>
+                setUserData({ ...userData, construction_date: e.target.value })
+              }
               type="text"
               placeholder="تاریخ مورد نظر خود را وارد نمایید"
               className="w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
           </div>
           <div className="w-[320px] h-[86px]">
-            <label className="text-[#003666] text-[16px] font-medium mr-2">تعدادطبقات </label>
+            <label className="text-[#003666] text-[16px] font-medium mr-2">
+              تعدادطبقات{" "}
+            </label>
             <input
               value={userData.floor_count}
               onChange={(e) => setUserData(...userData)}
@@ -515,32 +562,44 @@ const Home = () => {
         {/* ساعت تحویل و تخلیه */}
         <div className="sm:flex sm:w-[880px] -mr-8 sm:mr-[20px] gap-[120px]  my-10 ">
           <div className="w-[320px]  h-[150px] m-auto mb-10 sm:mb-0 ">
-            <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">ساعت تحویل اتاق</h1>
-            <ClockBox />
+            <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">
+              ساعت تحویل اتاق
+            </h1>
+            <ClockBox mainTime={userData.room_delivery_time} />
           </div>
           <div className="w-[320px] h-[150px] m-auto">
-            <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">ساعت تخلیه اتاق</h1>
-            <ClockBox />
+            <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">
+              ساعت تخلیه اتاق
+            </h1>
+            <ClockBox mainTime={userData.room_checkout_time} />
           </div>
         </div>
         {/* address */}
         <div className="flex flex-col -mr-8 sm:mr-[80px] items-center justify-center gap-4 mt-6 ">
           <div className="sm:flex  sm:w-[920px] gap-12 ">
             <div className="w-[320px] h-[86px] my-2 flex-1">
-              <label className="text-[#003666] text-[16px] font-medium mr-2">استان </label>
+              <label className="text-[#003666] text-[16px] font-medium mr-2">
+                استان{" "}
+              </label>
               <input
                 value={userData.state}
-                onChange={(e) => setUserData({ ...userData, state: e.target.value })}
+                onChange={(e) =>
+                  setUserData({ ...userData, state: e.target.value })
+                }
                 type="text"
                 placeholder="  لظفا نام استان خود را وارد نمایید"
                 className="w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
               />
             </div>
             <div className="w-[320px] sm:mr-8 h-[86px] my-2 flex-1">
-              <label className="text-[#003666] text-[16px] font-medium mr-2">شهرستان </label>
+              <label className="text-[#003666] text-[16px] font-medium mr-2">
+                شهرستان{" "}
+              </label>
               <input
                 value={userData.city}
-                onChange={(e) => setUserData({ ...userData, city: e.target.value })}
+                onChange={(e) =>
+                  setUserData({ ...userData, city: e.target.value })
+                }
                 type="text"
                 placeholder="لظفا نام شهرستان خود را وارد نمایید"
                 className="w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
@@ -550,10 +609,14 @@ const Home = () => {
           <div>
             <div className="w-[320px] h-[152px] flex items-center justify-center  ">
               <div>
-                <label className="text-[#003666] text-[16px] font-medium mr-2">آدرس </label>
+                <label className="text-[#003666] text-[16px] font-medium mr-2">
+                  آدرس{" "}
+                </label>
                 <textarea
                   value={userData.address}
-                  onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+                  onChange={(e) =>
+                    setUserData({ ...userData, address: e.target.value })
+                  }
                   type="text"
                   className="w-[320px] pr-8 py-2 sm:w-[920px] mt-2 h-[120px] sm:h-[52px] border text-[14px] border-[#C2C7CC] rounded-[10px] outline-none"
                 />
@@ -566,17 +629,23 @@ const Home = () => {
           <div className="sm:flex sm:w-[1000px] sm:gap-[100px]">
             <div className="w-[320px] sm:w-[420px] h-[85px] m-auto flex gap-2 my-8">
               <div>
-                <label className="text-[#003666]  text-[15px] mr-2">شماره تماس</label>
+                <label className="text-[#003666]  text-[15px] mr-2">
+                  شماره تماس
+                </label>
                 <input
                   value={userData.phone_number}
-                  onChange={(e) => setUserData({ ...userData, phone_number: e.target.value })}
+                  onChange={(e) =>
+                    setUserData({ ...userData, phone_number: e.target.value })
+                  }
                   type="tel"
                   placeholder=".شماره تماس اقامتگاه خود را وارد نمایید "
                   className=" px-2  mt-2 placeholder:pl-24 placeholder:text-[16px] text-[17px]  w-[233px] h-[52px] sm:w-[313px] outline-none border border-[#C2C7CC] rounded-[10px]"
                 />
               </div>
               <div>
-                <label className="text-[#003666] text-[15px]  mr-2">کدشهر</label>
+                <label className="text-[#003666] text-[15px]  mr-2">
+                  کدشهر
+                </label>
                 <input
                   type="tel"
                   placeholder="+98"
@@ -586,17 +655,27 @@ const Home = () => {
             </div>
             <div className="w-[320px] sm:w-[420px] h-[85px] m-auto flex gap-2 my-8">
               <div>
-                <label className="text-[#003666] text-[15px]  mr-2"> شماره تلفن همراه</label>
+                <label className="text-[#003666] text-[15px]  mr-2">
+                  {" "}
+                  شماره تلفن همراه
+                </label>
                 <input
                   value={userData.mobile_phone_number}
-                  onChange={(e) => setUserData({ ...userData, mobile_phone_number: e.target.value })}
+                  onChange={(e) =>
+                    setUserData({
+                      ...userData,
+                      mobile_phone_number: e.target.value,
+                    })
+                  }
                   type="tel"
                   placeholder=".لظفا شماره همراه خود را وارد نمایید "
                   className="placeholder:text-[16px] text-[17px] px-2 placeholder:pl-28 w-[233px]  mt-2 sm:w-[313px] h-[52px] outline-none border border-[#C2C7CC] rounded-[10px]"
                 />
               </div>
               <div>
-                <label className="text-[#003666] text-[15px]  mr-2">کدکشور</label>
+                <label className="text-[#003666] text-[15px]  mr-2">
+                  کدکشور
+                </label>
                 <input
                   type="tel"
                   placeholder="+98"
@@ -665,11 +744,14 @@ const Home = () => {
                 <path d="M18 12H19.5" stroke="#157B96" strokeLinecap="round" />
               </svg>
             </div>
-            <h2 className="text-[#003666] text-[16px] font-bold">برای افزودن لوگوی خود اینجا کلیک کنید</h2>
+            <h2 className="text-[#003666] text-[16px] font-bold">
+              برای افزودن لوگوی خود اینجا کلیک کنید
+            </h2>
           </div>
         </div>
         {/* send button */}
-       <Button/>
+        <button onClick={handleFormSubmit}>کلیک کن</button>
+        <Button />
       </div>
     </div>
   );
