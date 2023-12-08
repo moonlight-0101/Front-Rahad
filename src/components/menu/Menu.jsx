@@ -23,9 +23,9 @@ const Menu = () => {
         </div>
       </div>
     <div
-      className={
-        MenuOpen ? " z-20 w-[300px]  sm:mr-10 border-l   border-[#F1F6FC] " : "hidden relative sm:block"
-      }
+      className={`
+        ${MenuOpen ? " z-20  " : "hidden relative sm:block"}  -mt-[18px] border-l  border-[#F1F6FC]
+      `}
     >
       
     

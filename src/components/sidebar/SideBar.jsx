@@ -2,8 +2,9 @@ import React from 'react';
 
 const SideBar = () => {
     return (
-        <div className='flex flex-col bg-white mr-10 gap-4 z-40 width-[400px]  sm:static absolute top-[50px] left-[220px]'>
-                    <div className='flex gap-10 items-center justify-center mt-20   group  h-[70px] transition-al duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]'>
+        <div className=''>
+        <div className='flex  flex-col bg-white ml-4 mr-10 gap-4 z-40 width-[400px]  sm:static absolute top-[50px] left-[220px]'>
+                    <div className='flex gap-10 items-center justify-center mt-16 group  h-[70px] transition-al duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]'>
                     <span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path className='group-hover:stroke-white' d="M7 22H17" stroke="#157B96" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -130,6 +131,7 @@ const SideBar = () => {
                     </span>
                     <h2 className='text-[15px] text-[#1E202C] group-hover:text-white'>  خروج از حساب کاربری  </h2>
                 </div>
+         </div>
          </div>
     );
 };

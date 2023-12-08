@@ -13,6 +13,8 @@ import Cookies from "universal-cookie";
 import {locations} from "../data";
 import {Degree} from "../data";
 import Menu from "../components/menu/Menu";
+import Label from "../components/searchbox/label";
+import Button from "../components/button/Button";
 // import Menu from "../components/menu/Menu";
 
 const Home = () => {
@@ -105,64 +107,18 @@ const Home = () => {
 
   return (
     <div className=" max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1280px] sm:flex  ">
-      {/* <div>
-        <div className="sm:hidden w-[360px] h-[70px]  m-auto flex items-center  justify-around">
-          <div className="w-[48px] h-[48px]">
-            <img src={icon} className="w-[18px] h-[12px] mt-4" onClick={handlerButtonClick} />
-          </div>
-          <div>
-            <h3 className=" text-[#157B96] font-[800px] text-center text-[22px] ">RAHAD</h3>
-          </div>
-          <div className="w-[48px] h-[48px]">
-            <img src={search} className="w-[28px] h-[18px]  mt-4" />
-          </div>
-        </div>
-      <div
-        className={
-          MenuOpen ? " z-20 w-[300px]  sm:mr-10 border-l   border-[#F1F6FC] " : "hidden relative sm:block"
-        }
-      >
-        
-      
-        <div className="hidden sm:flex mt-8 w-[250px] h-[53px]">
-          <div className="w-full mr-10">
-            <h1 className="text-[35px] w-[158px] h-[50px] mt-1 text-[#12809E]">RAHAD</h1>
-            <h2 className="text-[#12809E] text-[14px]">Hotel Managment System</h2>
-          </div>
-          <div className=" w-[72px] h-[63px] -mr-[130px] -mt-2">
-            <img src={logo} className=' object-cover'/>
-          </div>
-        </div>
-       
-        <div className="mr-3">
-          <SideBar />
-        </div>
-    </div>
-    </div> */}
-    <Menu/>
+        <Menu/>
       <div className="  sm:mr-4 sm:w-[950px] ">
-        {/* header */}
-        {/* <div className="sm:hidden w-[360px] h-[70px]  m-auto flex items-center  justify-around">
-          <div className="w-[48px] h-[48px]">
-            <img src={icon} className="w-[18px] h-[12px] mt-4" onClick={handlerButtonClick} />
-          </div>
-          <div>
-            <h3 className=" text-[#157B96] font-[800px] text-center text-[22px] ">RAHAD</h3>
-          </div>
-          <div className="w-[48px] h-[48px]">
-            <img src={search} className="w-[28px] h-[18px]  mt-4" />
-          </div>
-        </div> */}
-        {/* <Menu/> */}
-        {/* header */}
-
-        {/* colorbox */}
-        <ColorBox />
+     
+          <ColorBox />
         {/* colorbox */}
 
         {/* search and setting */}
-
+        <div className='flex items-center  sm:justify-between'>
+          <Label/>
         <SearchBox />
+        </div>
+
         {/* foooorm */}
 
         <form className="flex flex-col sm:mr-[50px] -mr-8 sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
@@ -569,8 +525,8 @@ const Home = () => {
         </div>
         {/* address */}
         <div className="flex flex-col -mr-8 sm:mr-[80px] items-center justify-center gap-4 mt-6 ">
-          <div className="sm:flex sm:w-[920px] gap-[195px]">
-            <div className="w-[320px] h-[86px] my-2">
+          <div className="sm:flex  sm:w-[920px] gap-12 ">
+            <div className="w-[320px] h-[86px] my-2 flex-1">
               <label className="text-[#003666] text-[16px] font-medium mr-2">استان </label>
               <input
                 value={userData.state}
@@ -580,7 +536,7 @@ const Home = () => {
                 className="w-[320px] sm:w-[417px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
               />
             </div>
-            <div className="w-[320px] h-[86px] my-2">
+            <div className="w-[320px] sm:mr-8 h-[86px] my-2 flex-1">
               <label className="text-[#003666] text-[16px] font-medium mr-2">شهرستان </label>
               <input
                 value={userData.city}
@@ -713,14 +669,7 @@ const Home = () => {
           </div>
         </div>
         {/* send button */}
-        <div className="flex items-center justify-center gap-10 mb-10 sm:justify-end sm:-ml-[20px] sm:-mt-14">
-          <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
-            صفحه قبل
-          </button>
-          <button className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]">
-            صفحه بعد
-          </button>
-        </div>
+       <Button/>
       </div>
     </div>
   );
