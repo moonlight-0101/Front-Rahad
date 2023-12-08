@@ -15,18 +15,15 @@ import { Degree } from "../data";
 import Menu from "../components/menu/Menu";
 import Label from "../components/searchbox/label";
 import Button from "../components/button/Button";
-// import { ValueContext } from "../context/InputValue";
-// import Menu from "../components/menu/Menu";
-
+import { useNavigate } from "react-router-dom";
 const Home = () => {
-  // const {userData,setUserData} =useContext(ValueContext)
-
+  const navigateTo=useNavigate()
   const [loading, setLoading] = useState(true);
   // fetchdata
   const cookies = new Cookies();
   const [error, setError] = useState(null);
   const login_token = cookies.get("token");
-  console.log(login_token); //Token 66e06187ad133ace0ccf18f6cf5ed2b7d05dcc27
+
   const [userData, setUserData] = useState({
     name_of_residence: "",
     type_residence: "",
@@ -43,6 +40,7 @@ const Home = () => {
     floor_count: "",
     Language: "",
   });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,8 +68,8 @@ const Home = () => {
             construction_date: response.data.construction_date,
             floor_count: response.data.floor_count,
             Language: response.data.Language,
+            room_checkout_time: response.data.room_checkout_time,
           });
-          console.log("response.data", response.data);
         }
       } catch (error) {
         setError("متاسفانه خطا در دریافت اطلاعات رخ داده است");
@@ -80,11 +78,24 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const getArrayTime = (string) => string?.split(":");
+
+  const [roomDeliveryTime, setRoomDeliveryTime] = useState({
+    hour: "00",
+    min: "00",
+    sec: "00",
+  });
+  const [roomCheckoutTime, setRoomCheckoutTime] = useState({
+    hour: "00",
+    min: "00",
+    sec: "00",
+  });
+
   //  postdata
 
   const handleFormSubmit = async () => {
     try {
-      const response = await post(
+      const response = await axios.post(
         "https://backendrahad.pythonanywhere.com/ResidenceInfoCompletionView/",
         userData,
         {
@@ -94,7 +105,10 @@ const Home = () => {
           },
         }
       );
-      console.log(response);
+      if(response.status===200){
+      navigateTo("/setting")
+      }
+      // console.log("oooooooo", response);
     } catch (error) {
       setError("در ارسال اطلاعات مشکلی رخ داده است");
     }
@@ -125,9 +139,17 @@ const Home = () => {
     setLocation(
       locations.filter((item) => item.id === userData.type_residence).at(0)
     );
+    setRoomDeliveryTime({
+      hour: getArrayTime(userData.room_delivery_time)?.at(0),
+      min: getArrayTime(userData.room_delivery_time)?.at(1),
+      sec: getArrayTime(userData.room_delivery_time)?.at(2),
+    });
+    setRoomCheckoutTime({
+      hour: getArrayTime(userData.room_checkout_time)?.at(0),
+      min: getArrayTime(userData.room_checkout_time)?.at(1),
+      sec: getArrayTime(userData.room_checkout_time)?.at(2),
+    });
   }, [userData]);
-
-  // console.log("selectedItem", selectedItem);
 
   return (
     <div className=" max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1280px] sm:flex  ">
@@ -145,14 +167,17 @@ const Home = () => {
         {/* foooorm */}
 
         <form className="flex flex-col sm:mr-[50px] -mr-8 sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
-           <div className="w-[320px] h-[86px]">
+          <div className="w-[320px] h-[86px]">
             <label className="text-[#003666] text-[16px] font-medium mr-2">
               نام اقامتگاه
             </label>
             <input
               value={userData.name_of_residence}
               onChange={(e) =>
-                setUserData({ ...userData, name_of_residence: e.target.value })
+                setUserData((prev) => ({
+                  ...prev,
+                  name_of_residence: e.target.value,
+                }))
               }
               type="text"
               placeholder="نام خود را وارد کنید"
@@ -167,7 +192,10 @@ const Home = () => {
             <input
               value={userData.website_address}
               onChange={(e) =>
-                setUserData({ ...userData, website_address: e.target.value })
+                setUserData((prev) => ({
+                  ...prev,
+                  website_address: e.target.value,
+                }))
               }
               type="text"
               placeholder="لینک آدرس وبسایت خود را وارد نمایید ."
@@ -184,6 +212,12 @@ const Home = () => {
               type="text"
               placeholder="  انتخاب  کنید"
               value={location?.Name}
+              onChange={(e) =>
+                setUserData((prev) => ({
+                  ...prev,
+                  type_residence: e.target.value,
+                }))
+              }
               className="w-[320px] sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
             <div
@@ -539,7 +573,10 @@ const Home = () => {
             <input
               value={userData.construction_date}
               onChange={(e) =>
-                setUserData({ ...userData, construction_date: e.target.value })
+                setUserData((prev) => ({
+                  ...prev,
+                  construction_date: e.target.value,
+                }))
               }
               type="text"
               placeholder="تاریخ مورد نظر خود را وارد نمایید"
@@ -552,7 +589,12 @@ const Home = () => {
             </label>
             <input
               value={userData.floor_count}
-              onChange={(e) => setUserData(...userData)}
+              onChange={(e) =>
+                setUserData((prev) => ({
+                  ...prev,
+                  floor_count: e.target.value,
+                }))
+              }
               type="text"
               placeholder=" تعداد طبقات اقامتگاه خود را وارد نمایید"
               className="w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
@@ -565,13 +607,19 @@ const Home = () => {
             <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">
               ساعت تحویل اتاق
             </h1>
-            <ClockBox mainTime={userData.room_delivery_time} />
+            <ClockBox
+              mainTime={roomDeliveryTime}
+              setTime={setRoomDeliveryTime}
+            />
           </div>
           <div className="w-[320px] h-[150px] m-auto">
             <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">
               ساعت تخلیه اتاق
             </h1>
-            <ClockBox mainTime={userData.room_checkout_time} />
+            <ClockBox
+              mainTime={roomCheckoutTime}
+              setTime={setRoomCheckoutTime}
+            />
           </div>
         </div>
         {/* address */}
@@ -584,7 +632,7 @@ const Home = () => {
               <input
                 value={userData.state}
                 onChange={(e) =>
-                  setUserData({ ...userData, state: e.target.value })
+                  setUserData((prev) => ({ ...prev, state: e.target.value }))
                 }
                 type="text"
                 placeholder="  لظفا نام استان خود را وارد نمایید"
@@ -598,7 +646,7 @@ const Home = () => {
               <input
                 value={userData.city}
                 onChange={(e) =>
-                  setUserData({ ...userData, city: e.target.value })
+                  setUserData((prev) => ({ ...prev, city: e.target.value }))
                 }
                 type="text"
                 placeholder="لظفا نام شهرستان خود را وارد نمایید"
@@ -615,7 +663,10 @@ const Home = () => {
                 <textarea
                   value={userData.address}
                   onChange={(e) =>
-                    setUserData({ ...userData, address: e.target.value })
+                    setUserData((prev) => ({
+                      ...prev,
+                      address: e.target.value,
+                    }))
                   }
                   type="text"
                   className="w-[320px] pr-8 py-2 sm:w-[920px] mt-2 h-[120px] sm:h-[52px] border text-[14px] border-[#C2C7CC] rounded-[10px] outline-none"
@@ -635,7 +686,10 @@ const Home = () => {
                 <input
                   value={userData.phone_number}
                   onChange={(e) =>
-                    setUserData({ ...userData, phone_number: e.target.value })
+                    setUserData((prev) => ({
+                      ...prev,
+                      phone_number: e.target.value,
+                    }))
                   }
                   type="tel"
                   placeholder=".شماره تماس اقامتگاه خود را وارد نمایید "
@@ -662,10 +716,10 @@ const Home = () => {
                 <input
                   value={userData.mobile_phone_number}
                   onChange={(e) =>
-                    setUserData({
-                      ...userData,
+                    setUserData((prev) => ({
+                      ...prev,
                       mobile_phone_number: e.target.value,
-                    })
+                    }))
                   }
                   type="tel"
                   placeholder=".لظفا شماره همراه خود را وارد نمایید "
@@ -750,8 +804,17 @@ const Home = () => {
           </div>
         </div>
         {/* send button */}
-        <button onClick={handleFormSubmit}>کلیک کن</button>
-        <Button />
+
+        <div className="flex items-center justify-center gap-10 mb-10 sm:justify-end sm:-ml-[20px] sm:-mt-14">
+          <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
+            صفحه قبل
+          </button>
+          <button 
+          onClick={handleFormSubmit}
+          className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]">
+            صفحه بعد
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,22 @@
 import React from 'react';
+// import axios from 'axios';
+
+// const handleFormSubmit = async ({data}) => {
+//   try {
+//     const response = await axios.post(
+//       "https://backendrahad.pythonanywhere.com/ResidenceInfoCompletionView/",data,
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: login_token,
+//         },
+//       }
+//     );
+//     console.log(response);
+//   } catch (error) {
+//     setError("در ارسال اطلاعات مشکلی رخ داده است");
+//   }
+// };
 
 const Button = () => {
     return (
