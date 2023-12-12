@@ -10,13 +10,13 @@ const Menu = () => {
       setMenuOpen(!MenuOpen);
     };
     return (
-      <div>
-      <div className="sm:hidden w-[360px] h-[70px]  m-auto flex items-center  justify-around">
+      <div className='flex items-center sm:block justify-center  mt-8   '>
+      <div className="sm:hidden min-w-[360px] h-[70px]  m-auto flex items-center justify-center gap-4 ">
         <div className="w-[48px] h-[48px]">
-          <img src={icon} className="w-[18px] h-[12px] mt-4" onClick={handlerButtonClick} />
+          <img src={icon} className="w-[18px] mr-4 h-[12px] mt-4" onClick={handlerButtonClick} />
         </div>
         <div>
-          <h3 className=" text-[#157B96] font-[800px] text-center text-[22px] ">RAHAD</h3>
+        <img src={logo} className='w-[192px] h-[55px]'/>
         </div>
         <div className="w-[48px] h-[48px]">
           <img src={search} className="w-[28px] h-[18px]  mt-4" />
@@ -29,17 +29,14 @@ const Menu = () => {
     >
       
     
-      <div className="hidden sm:flex mt-8 w-[250px] h-[53px]">
-        <div className="w-full mr-10">
-          <h1 className="text-[35px] w-[158px] h-[50px] mt-1 text-[#12809E]">RAHAD</h1>
-          <h2 className="text-[#12809E] text-[14px]">Hotel Managment System</h2>
-        </div>
-        <div className=" w-[72px] h-[63px] -mr-[130px] -mt-2">
-          <img src={logo} className=' object-cover'/>
+      <div className="hidden sm:flex mt-10 w-[250px] h-[53px]">
+        
+        <div className=" sm:mr-10">
+          <img src={logo} className='w-[252px] h-[75px]'/>
         </div>
       </div>
       {/* <Sidebar/> */}
-      <div className="mr-3">
+      <div className="">
         <SideBar />
       </div>
   </div>

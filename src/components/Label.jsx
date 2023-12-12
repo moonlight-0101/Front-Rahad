@@ -2,7 +2,7 @@ import React from 'react';
 
 const Label = () => {
     return (
-        <div className='flex items-center justify-center sm:justify-start sm:my-[60px] mr-4 sm:mr-12 gap-2 mt-2'> 
+        <div className='flex items-center justify-center sm:justify-start sm:my-[60px] mr-4  gap-2 mt-2'> 
         <h3 className='text-[#087592]  text-[22px] font-bold'>تنظیمات</h3>
         <div>
         <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">

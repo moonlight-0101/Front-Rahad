@@ -9,8 +9,12 @@ import Button from "../components/button/Button";
 
 const Setting = () => {
   return (
-    <div className=' className=" max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1280px] sm:flex '>
-      <Menu />
+    <div className='min-w-[360px] p-[1rem] sm:p-0  items-center justify-center sm:justify-start flex-col sm:flex-row m-auto  sm:max-w-[1280px] flex '>
+      <div className="sm:-mr-4 sm:-mt-20">
+
+      <Menu/>
+      </div>
+
       {/* topbar */}
       <div className="sm:w-[940px]  h-full ">
         <div className="">
@@ -49,7 +53,7 @@ const Setting = () => {
           <div>
             <h1 className="text-[#003666] text-[25px]">ویژگی و امکانات هتل</h1>
           </div>
-          <div className=" flex gap-24 ">
+          <div className=" flex  justify-around  items-center sm:justify-start  sm:gap-24 ">
             {/* right */}
             <div>
               {hotel.slice(0, 5).map((item) => (
@@ -58,7 +62,7 @@ const Setting = () => {
                   class="flex  items-center justify-between w-[100px] sm:w-[150px] mt-10"
                 >
                   <label className="text-[12px]  sm:text-[16px] font-medium text-[#003666] dark:text-gray-300">
-                    {item.name}{" "}
+                    {item.name}
                   </label>
                   <input type="checkbox" value="" />
                 </div>
@@ -80,7 +84,7 @@ const Setting = () => {
             </div>
           </div>
         </div>
-        <div className="sm:mt-[250px] mt-[100px]">
+        <div className="sm:mt-[250px] mt-[90px]">
           <Button />
         </div>
       </div>

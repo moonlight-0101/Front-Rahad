@@ -152,22 +152,25 @@ const Home = () => {
   }, [userData]);
 
   return (
-    <div className=" max-w-[320px] m-auto   sm:m-0 sm:mr-1 sm:max-w-[1280px] sm:flex  ">
+    <div className=" min-w-[360px] m-auto px-[1rem] sm:px-0 flex  sm:justify-start justify-center flex-col sm:flex-row   sm:m-0 sm:mr-1 sm:min-w-[1280px]   ">
       <Menu />
-      <div className="  sm:mr-4 sm:w-[950px] ">
+      <div className=" sm:mr-4 sm:w-[950px] ">
+        <div className="w-full sm:w-[1000px] flex items-center justify-center">
         <ColorBox />
+
+        </div>
         {/* colorbox */}
 
         {/* search and setting */}
-        <div className="flex items-center  sm:justify-between">
+        <div className="flex items-center justify-center -mt-4  sm:justify-between">
           <Label />
           <SearchBox />
         </div>
 
         {/* foooorm */}
 
-        <form className="flex flex-col sm:mr-[50px]  sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
-          <div className="w-[320px] h-[86px]">
+        <form className="flex flex-col sm:mr-[50px] sm:px-0   sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
+          <div className="flex   flex-col h-[86px]">
             <label className="text-[#003666] text-[16px] font-medium mr-2">
               نام اقامتگاه
             </label>
@@ -181,7 +184,7 @@ const Home = () => {
               }
               type="text"
               placeholder="نام خود را وارد کنید"
-              className="w-[320px] sm:w-[420px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
+              className=" sm:w-[420px] min-w-[320px]  mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
           </div>
           <div className="w-[320px] h-[86px]">

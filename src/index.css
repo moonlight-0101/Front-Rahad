@@ -54,7 +54,6 @@
 body{
   font-family: "Light";
   overflow-x: hidden;
-  touch-action: none;
  list-style-type: none;
 }
 @font-face {
