@@ -11,6 +11,7 @@ const Label = () => {
         </div>
         <h3 className='text-[#087599] text-[14px] font-thin'>تعریف اقامتگاه</h3>
      </div>
+    
     );
 };
 

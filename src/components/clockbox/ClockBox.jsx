@@ -3,6 +3,21 @@ import React, { useState } from "react";
 const ClockBox = ({ mainTime, setTime }) => {
     // const [inputValue, SetInputValue] = useState();
     const [timeFormat, setTimeFormat] = useState("pm");
+    // const [value, setValue] = useState();
+
+    const handelInputChange = (event) => {
+        const value = event.target.value;
+        SetInputValue(value);
+        if (parseInt(value) >= 12) {
+            setTimeFormat("am");
+        } else {
+            setTimeFormat("pm");
+        }
+    };
+    const handleMinuteChange = (event) => {
+        const value = event.target.value;
+        setValue(value);
+    };
     return (
         <div className="w-[320px] sm:w-[420px] rounded-[9px] p-[10px] flex flex-row-reverse items-center gap-5 justify-center  border border-[rgb(162,175,184)]">
             <div>

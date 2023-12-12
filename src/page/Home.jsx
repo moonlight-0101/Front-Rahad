@@ -5,7 +5,7 @@ import map from "../image/map.svg";
 import logo from "../image/logo.svg";
 import ColorBox from "../components/colorbox/ColorBox";
 import SideBar from "../components/sidebar/SideBar";
-import NeshanM from "../components/map/NeshanM";
+// import NeshanM from "../components/map/NeshanM";
 import SearchBox from "../components/searchbox/SearchBox";
 import ClockBox from "../components/clockbox/ClockBox";
 import axios from "axios";
@@ -13,11 +13,11 @@ import Cookies from "universal-cookie";
 import { locations } from "../data";
 import { Degree } from "../data";
 import Menu from "../components/menu/Menu";
-import Label from "../components/searchbox/label";
+import Label from "../components/Label";
 import Button from "../components/button/Button";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
-  const navigateTo=useNavigate()
+  const navigateTo = useNavigate();
   const [loading, setLoading] = useState(true);
   // fetchdata
   const cookies = new Cookies();
@@ -105,8 +105,8 @@ const Home = () => {
           },
         }
       );
-      if(response.status===200){
-      navigateTo("/setting")
+      if (response.status === 200) {
+        navigateTo("/setting");
       }
       // console.log("oooooooo", response);
     } catch (error) {
@@ -166,7 +166,7 @@ const Home = () => {
 
         {/* foooorm */}
 
-        <form className="flex flex-col sm:mr-[50px] -mr-8 sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
+        <form className="flex flex-col sm:mr-[50px]  sm:grid sm:grid-cols-2 sm:w-[994px] gap-6  items-center justify-center mt-8 m-auto">
           <div className="w-[320px] h-[86px]">
             <label className="text-[#003666] text-[16px] font-medium mr-2">
               نام اقامتگاه
@@ -602,7 +602,7 @@ const Home = () => {
           </div>
         </form>
         {/* ساعت تحویل و تخلیه */}
-        <div className="sm:flex sm:w-[880px] -mr-8 sm:mr-[20px] gap-[120px]  my-10 ">
+        <div className="sm:flex sm:w-[880px]  sm:mr-[20px] gap-[120px]  my-10 ">
           <div className="w-[320px]  h-[150px] m-auto mb-10 sm:mb-0 ">
             <h1 className="text-[#003666] font-bold text-[16px] mr-4 my-4">
               ساعت تحویل اتاق
@@ -623,7 +623,7 @@ const Home = () => {
           </div>
         </div>
         {/* address */}
-        <div className="flex flex-col -mr-8 sm:mr-[80px] items-center justify-center gap-4 mt-6 ">
+        <div className="flex flex-col  sm:mr-[80px] items-center justify-center gap-4 mt-6 ">
           <div className="sm:flex  sm:w-[920px] gap-12 ">
             <div className="w-[320px] h-[86px] my-2 flex-1">
               <label className="text-[#003666] text-[16px] font-medium mr-2">
@@ -676,7 +676,7 @@ const Home = () => {
           </div>
         </div>
         {/* userinfo */}
-        <div className="flex items-center -mr-8 sm:mr-[80px] justify-center">
+        <div className="flex items-center  sm:mr-[80px] justify-center">
           <div className="sm:flex sm:w-[1000px] sm:gap-[100px]">
             <div className="w-[320px] sm:w-[420px] h-[85px] m-auto flex gap-2 my-8">
               <div>
@@ -746,7 +746,7 @@ const Home = () => {
             موقعیت مکانی را روی نقشه مشخص کنید.
           </h2>
           <div className=" sm:w-[1080px] w-[350px] mb-10">
-            <NeshanM />
+            {/* <NeshanM /> */}
 
             {/* <img src={map} /> */}
           </div>
@@ -809,9 +809,10 @@ const Home = () => {
           <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
             صفحه قبل
           </button>
-          <button 
-          onClick={handleFormSubmit}
-          className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]">
+          <button
+            onClick={handleFormSubmit}
+            className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]"
+          >
             صفحه بعد
           </button>
         </div>
