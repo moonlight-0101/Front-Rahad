@@ -1,10 +1,10 @@
 import React from "react";
-import ColorBox from "../components/colorbox/ColorBox";
-import SearchBox from "../components/searchbox/SearchBox";
-import { hotel } from "../data";
-import Menu from "../components/menu/Menu";
-import Label from "../components/Label";
-import Button from "../components/button/Button";
+// import ColorBox from "../components/colorbox/ColorBox";
+// import SearchBox from "../components/searchbox/SearchBox";
+// import { hotel, sidebardata } from "../data";
+// import Menu from "../components/menu/Menu";
+// import Label from "../components/Label";
+// import Button from "../components/button/Button";
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
@@ -15,20 +15,24 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-// import  MySwiper from "../components/btnS/MySwiper";
+
 const AddImage = () => {
   return (
     <div className="m-auto">
-       <div className='  max-w-[320px] m-auto flex-col items-center h-full sm:justify-start justify-center sm:flex-row px-8 sm:px-0 py-2  sm:m-0  sm:max-w-[1280px] sm:flex  relative  '>
-      <Menu />
+       <div className='  min-w-[360px] m-auto p-[10px] sm:p-0 flex-col items-center h-full sm:justify-start justify-center sm:flex-row px-8 sm:px-0   sm:m-0  sm:max-w-[1280px] sm:flex  relative  '>
+        <div className=" sm:-mt-20">
+        {/* <Menu /> */}
+        </div>
       {/* topbar */}
       <div className="sm:w-[940px] h-full  ">
-        <div className="">
-          <ColorBox />
+        <div>
+          <div className="flex items-center justify-center sm:block">
+          {/* <ColorBox /> */}
+          </div>
           {/* label */}
-          <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center justify-center sm:justify-between mb-10">
             <div className="flex justify-center  gap-3 items-center">
-              <Label />
+              {/* <Label /> */}
               <div className="hidden sm:flex items-center justify-center gap-2">
                 <div>
                   <svg
@@ -72,15 +76,16 @@ const AddImage = () => {
                 </h3>
               </div>
             </div>
-            <SearchBox />
+            {/* <SearchBox /> */}
           </div>
         </div>
-        <h1 className="sm:mr-10 mb-5 text-[#003666] text-[22px] w-[300px]">
+
+        <h1 className="sm:mr-10 mr-4 mb-5 text-[#003666] text-[22px] w-[300px]">
           تصاویر هتل خود را وارد نمایید
         </h1>
-        <div className="w-[300px] sm:w-[868px] h-[330px] sm:border    border-[#C2C7CC] sm:mr-10 flex items-center justify-center">
+        <div className="min-w-full  sm:p-0 sm:w-[868px] h-[330px] sm:border    border-[#C2C7CC] sm:mr-10 flex items-center justify-center">
           <div className="w-[642px] h-[230px]  border border-[#C2C7CC] ">
-            <p className="-mt-10 sm:-mr-20 w-[330px] sm:w-full">
+            <p className="-mt-10 sm:-mr-20 w-[50] sm:w-full">
               <span className="text-[#003666]  text-[14px] sm:text-[16px]">گالری تصاویر</span>
               <span className="sm:text-[12px] text-[10px] text-[#A2AFB8]">
                 ( عکس ها باید با فرمت jpg و تعداد حداکثر 15 عدد باشند )
@@ -88,18 +93,18 @@ const AddImage = () => {
             </p>
             {/* slider */}
            
-              <div>
+              <div className="">
 
-                 {/* <Swiper
-                 className=' flex w-[300px]   sm:w-[643px] h-[230px] mt-6 justify-center items-center overflow-visible '
+                 <Swiper
+                 className=' flex w-[50vw] bg-red-700   sm:w-[643px] h-[230px] mt-6 justify-center items-center overflow-visible '
                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                 spaceBetween={50}
+                 spaceBetween={30}
                  slidesPerView={1}
                  navigation={true}
                 
                >
 
-                  <SwiperSlide className="flex items-center justify-center">
+                  <SwiperSlide className="flex  items-center justify-center">
                     <svg
                       width="52"
                       height="53"
@@ -138,51 +143,16 @@ const AddImage = () => {
                     </svg>
                   </SwiperSlide>
                   <SwiperSlide className="flex items-center justify-center">
-                    <svg
-                      width="52"
-                      height="53"
-                      viewBox="0 0 52 53"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M17.9161 40.0769V22.3994L12 28.2919"
-                        stroke="#A2AFB8"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M17.918 22.3994L23.8341 28.2919"
-                        stroke="#A2AFB8"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M47.6673 21.9825V32.7726C47.6673 43.5627 43.334 47.8788 32.5007 47.8788H19.5007C8.66732 47.8788 4.33398 43.5627 4.33398 32.7726V19.8244C4.33398 9.03431 8.66732 4.71826 19.5007 4.71826H30.334"
-                        stroke="#A2AFB8"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M39.0007 21.9825C32.5007 21.9825 30.334 19.8244 30.334 13.3504V4.71826L47.6673 21.9825H39.0007Z"
-                        stroke="#A2AFB8"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
+                    <h2>opop</h2>
                   </SwiperSlide>
-                </Swiper> */}
+                </Swiper>
                
 
                 {/* <div className=' w-[1380px] h-full bg-black/80 absolute top-0 left-0'></div> */}
               </div>
            
             {/* slider */}
-            <div className="flex sm:flex-row sm:gap-8 gap-4 flex-col mt-[200px]  -mr-[200px] sm:mr-0 left-0  static">
+            <div className="flex sm:flex-row sm:gap-8 gap-4 flex-col   -mr-[200px] sm:mr-0 left-0  static">
               <div className="flex  mr-10 sm:mr-0 items-center gap-2 justify-center">
                 <span>
                   <svg
@@ -263,11 +233,13 @@ const AddImage = () => {
         </div>
 
         <div className="sm:mt-[250px] mt-[100px]">
-          <Button />
+          {/* <Button /> */}
         </div>
       </div>
     </div>
+
     </div>
+    
    
   );
 };

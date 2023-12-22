@@ -2,7 +2,7 @@ import React from 'react';
 
 const ColorBox = () => {
     return (
-    <div className=' sm:h-[110px] border-b border-[#F1F6FC] sm:mr-10 no-scrollbar sm:w-[1004px]  w-[320px] h-[153px] sm:mt-6  overflow-x-scroll  flex justify-center flex-row-reverse items-center gap-8  '>
+    <div className=' sm:h-[110px] border-none sm:border-b border-[#F1F6FC] sm:mr-10 no-scrollbar sm:w-[1004px]  w-[320px] h-[153px] sm:mt-6  overflow-x-scroll  flex justify-center flex-row-reverse items-center gap-8  '>
         <div className='leading-2'>
             <div className="w-[50px] h-[50px] rounded-full bg-[#7AE03B] flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -15,7 +15,8 @@ const Login = () => {
     const [errorBorder,setErrorBorder]=useState(true)
     const [Password,setPassword]=useState('')
     const [type, setType] = useState('password');
-     const [icon, setIcon] = useState(hidden);
+    const [icon, setIcon] = useState(hidden);
+    const [submit,setSubmit]=useState(false)
      
 
      const handleToggle =()=>{
@@ -29,6 +30,7 @@ const Login = () => {
    }
     console.log(UserName,Password);
     const handelSubmit=async (event)=>{
+        setSubmit(true)
         event.preventDefault()
         setPassword(''),
         setUsername(''),
@@ -40,9 +42,11 @@ const Login = () => {
             },  {headers:{
                 "Content-Type":'application/json'
             }
-    })
-    if(response.status===200){
-        const tokens=response.data
+        }
+       
+        )
+        if(response.status===200){
+            const tokens=response.data
         const token=tokens.data.Authorization
         const cookie=new Cookies()
         cookie.set("token",token)
@@ -54,15 +58,16 @@ const Login = () => {
                 setErrorBorder(false)
             }
         }
+        setSubmit(false)
     }
     return (
         <div>
-            <div className='sm:h-full h-[800px] px-[8px] sm:p-1  m-auto sm:max-w-[1280px] min-w-[360px] items-center  flex  sm:justify-around justify-center   '>
+            <div className='sm:h-[450px] mt-10 px-[8px] sm:p-1  m-auto sm:max-w-[1280px] min-w-[360px] items-center  flex sm:justify-between justify-center   '>
               <div className="flex " >
-              <div className='w-[74px] flex items-center gap-2 justify-center mt-2 h-[40px]  border border-[#AAAAAA] fixed rounded-[8px] left-[309px] sm:left-[1199px] sm:top-[24px] top-[18px]'>
+              {/* <div className='w-[74px] flex items-center gap-2 justify-center mt-2 h-[40px]  border border-[#AAAAAA] fixed rounded-[8px] left-[309px] sm:left-[1199px] sm:top-[24px] top-[18px]'>
                 <h4 className='text-[18px]'>PR</h4>
                 <img src={Language} className='w-[24px] h-[24px]'/>
-                </div>
+                </div> */}
               </div>
                 <div className=''>
                     <h3 className='hidden sm:block  w-[390px] h-[38px] text-[#003666] font-[800px] mr-10 text-[26px] mt-[134px]'>به نرم افزار هتلداری رها خوش آمدین</h3>
@@ -109,8 +114,9 @@ const Login = () => {
                         <div className='flex items-center w-full justify-center   sm:ml-0'>
                         <button 
                         onClick={handelSubmit}
-                        className='sm:max-w-[200px] h-[55px] w-full bg-gradient-to-r from-[#087592] to-[#2393B0]
-                          rounded-[10px] text-white sm:top-[520px] sm:mt-[100px] mt-20 sm:right-[230px]'>ورود</button>
+                        disabled={submit}
+                        className={`sm:max-w-[200px] ${submit&& "opacity-80"} h-[55px] w-full bg-gradient-to-r from-[#087592] to-[#2393B0]
+                          rounded-[10px] text-white sm:top-[520px] sm:mt-[100px] mt-20 sm:right-[230px]`}>{submit?" درحال انتظار ":"ورود"}</button>
 
                         </div>
                     </form>

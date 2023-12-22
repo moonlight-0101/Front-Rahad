@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
+    "date-fns": "^3.0.0",
+    "moment-jalaali": "^0.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-neshan-map-leaflet": "^1.2.1",
     "react-router-dom": "^6.20.1",
     "swipe-core": "^0.1.13",
     "swiper": "^11.0.5",

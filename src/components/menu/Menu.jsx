@@ -3,6 +3,17 @@ import icon from "../../image/icon.svg"
 import search from "../../image/search-normal.svg";
 import logo from "../../image/logo.svg";
 import SideBar from '../sidebar/SideBar';
+import close from "../../image/close.svg"
+// import { Calendar } from 'react-multi-date-picker';
+import DataDay from "../date-picker/DataDay";
+// let today = new Date();
+// گرفتن تاریخ امروز
+// let day = today.toLocaleDateString("fa-IR")
+// let month = today.toLocaleDateString("fa-IR") ; 
+// let year = today.getFullYear();
+
+// نمایش تاریخ به صورت رشته
+// console.log(`امزوز: ${month}`);
  
 const Menu = () => {
     const [MenuOpen, setMenuOpen] = useState(false)
@@ -10,17 +21,20 @@ const Menu = () => {
       setMenuOpen(!MenuOpen);
     };
     return (
-      <div className='flex items-center sm:block justify-center  mt-8   '>
+      <>
+      <div className={`flex items-center sm:block justify-center  mt-4 `}>
       <div className="sm:hidden min-w-[360px] h-[70px]  m-auto flex items-center justify-center gap-4 ">
         <div className="w-[48px] h-[48px]">
-          <img src={icon} className="w-[18px] mr-4 h-[12px] mt-4" onClick={handlerButtonClick} />
+          <img src={MenuOpen ? close:icon } className="w-[28px]  mr-4 h-[22px] mt-4" onClick={handlerButtonClick} />
         </div>
-        <div>
-        <img src={logo} className='w-[192px] h-[55px]'/>
+        <div className={`${MenuOpen && "hidden"}`}>
+        <img src={logo} className='w-[192px] z-20  h-[55px]'/>
         </div>
         <div className="w-[48px] h-[48px]">
-          <img src={search} className="w-[28px] h-[18px]  mt-4" />
+          <img src={search} className="w-[28px] h-[22px]  mt-4" />
         </div>
+        <h2 className={`${MenuOpen ? "text-[#157B96] ml-6  font-[800] mt-2  text-[50px]" :"hidden"}`}>RAHAD</h2>
+    
       </div>
     <div
       className={`
@@ -29,7 +43,7 @@ const Menu = () => {
     >
       
     
-      <div className="hidden sm:flex mt-10 w-[250px] h-[53px]">
+      <div className="hidden sm:flex mt-8 z-50 mb-10 w-[250px] h-[53px]">
         
         <div className=" sm:mr-10">
           <img src={logo} className='w-[252px] h-[75px]'/>
@@ -41,6 +55,10 @@ const Menu = () => {
       </div>
   </div>
   </div>
+      <div className='m-auto sm:hidden '>
+        <DataDay/>
+      </div>
+  </>
     );
 };
 

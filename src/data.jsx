@@ -65,4 +65,7 @@ const hotel=[
     {id:9,name:"ماساژ"},
     {id:10,name:"اینترنت"},
 ]
+
+
+
 export { Degree, locations,hotel };

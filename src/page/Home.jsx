@@ -5,7 +5,7 @@ import map from "../image/map.svg";
 import logo from "../image/logo.svg";
 import ColorBox from "../components/colorbox/ColorBox";
 import SideBar from "../components/sidebar/SideBar";
-// import NeshanM from "../components/map/NeshanM";
+import NeshanM from "../components/map/NeshanM";
 import SearchBox from "../components/searchbox/SearchBox";
 import ClockBox from "../components/clockbox/ClockBox";
 import axios from "axios";
@@ -54,6 +54,7 @@ const Home = () => {
           }
         );
         if (response.data) {
+          console.log("oooooooo", response);
           setUserData({
             name_of_residence: response.data.name_of_residence,
             type_residence: response.data.type_residence,
@@ -106,38 +107,51 @@ const Home = () => {
         }
       );
       if (response.status === 200) {
-        navigateTo("/setting");
+        navigateTo("/addimage");
       }
-      // console.log("oooooooo", response);
+      console.log("oooooooo", response);
     } catch (error) {
       setError("در ارسال اطلاعات مشکلی رخ داده است");
     }
   };
 
   const [showMenu, setShowMenu] = useState(false);
-  const handlerIconClick = () => {
-    setShowMenu(!showMenu);
-  };
-  const [showLocation, setShowLocation] = useState(false);
-  const handlerlocationClick = () => {
-    setShowLocation(!showLocation);
-  };
 
-  const [location, setLocation] = useState();
+  const [showLocation, setShowLocation] = useState(false);
+
+  const [location, setLocation] = useState("");
   const handlerLocation = (item) => {
     setLocation(item);
   };
-  const [selectedItem, setSelectedItem] = useState();
+  const [selectedItem, setSelectedItem] = useState("");
   const handleItemClick = (item) => {
     setSelectedItem(item);
   };
+
+  //   setSelectedItem(
+  //     Degree.filter((item) => item.id === userData.degree_residence).at(0)
+  //   );
+  //   setLocation(
+  //     locations.filter((item) => item.id === userData.type_residence).at(0)
+  //   );
+  //   setRoomDeliveryTime({
+  //     hour: getArrayTime(userData.room_delivery_time)?.at(0),
+  //     min: getArrayTime(userData.room_delivery_time)?.at(1),
+  //     sec: getArrayTime(userData.room_delivery_time)?.at(2),
+  //   });
+  //   setRoomCheckoutTime({
+  //     hour: getArrayTime(userData.room_checkout_time)?.at(0),
+  //     min: getArrayTime(userData.room_checkout_time)?.at(1),
+  //     sec: getArrayTime(userData.room_checkout_time)?.at(2),
+  //   });
+  // }, [userData]);
 
   useEffect(() => {
     setSelectedItem(
       Degree.filter((item) => item.id === userData.degree_residence).at(0)
     );
     setLocation(
-      locations.filter((item) => item.id === userData.type_residence).at(0)
+      locations.filter((item) => item.Name === userData.type_residence).at(0)
     );
     setRoomDeliveryTime({
       hour: getArrayTime(userData.room_delivery_time)?.at(0),
@@ -150,14 +164,14 @@ const Home = () => {
       sec: getArrayTime(userData.room_checkout_time)?.at(2),
     });
   }, [userData]);
+  console.log(location);
 
   return (
-    <div className=" min-w-[360px] m-auto px-[1rem] sm:px-0 flex  sm:justify-start justify-center flex-col sm:flex-row   sm:m-0 sm:mr-1 sm:min-w-[1280px]   ">
+    <div className=" min-w-[360px] m-auto  px-[1rem] sm:px-0 flex  sm:justify-start justify-center flex-col sm:flex-row   sm:m-0 sm:mr-1 sm:min-w-[1280px]   ">
       <Menu />
-      <div className=" sm:mr-4 sm:w-[950px] ">
+      <div className=" sm:mr-4 sm:w-[950px] h-full ">
         <div className="w-full sm:w-[1000px] flex items-center justify-center">
-        <ColorBox />
-
+          <ColorBox />
         </div>
         {/* colorbox */}
 
@@ -189,7 +203,6 @@ const Home = () => {
           </div>
           <div className="w-[320px] h-[86px]">
             <label className="text-[#003666] text-[16px] font-medium mr-2">
-              {" "}
               آدرس وبسایت
             </label>
             <input
@@ -208,20 +221,21 @@ const Home = () => {
 
           <div className="w-[320px] h-[86px] relative group z-10 ">
             <label className="text-[#003666] text-[16px] font-medium mr-2">
-              {" "}
               نوع اقامتگاه
             </label>
             <input
               type="text"
+              onClick={() => setShowLocation(!showLocation)}
               placeholder="  انتخاب  کنید"
               value={location?.Name}
+              // value={"هتل آپارتمان"}
               onChange={(e) =>
                 setUserData((prev) => ({
                   ...prev,
                   type_residence: e.target.value,
                 }))
               }
-              className="w-[320px] sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
+              className="w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
             <div
               className={
@@ -236,7 +250,8 @@ const Home = () => {
                 viewBox="0 0 16 9"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                onClick={handlerlocationClick}
+                onClick={() => setShowLocation(!showLocation)}
+                className="cursor-pointer"
               >
                 <path
                   d="M1.35352 1.41699L8.38281 8.44629L15.4121 1.41699"
@@ -266,6 +281,7 @@ const Home = () => {
               </div>
             </div>
           </div>
+         
 
           <div className="w-[320px] h-[86px] relative group ">
             <label className="text-[#003666] text-[16px] font-medium mr-2">
@@ -273,9 +289,10 @@ const Home = () => {
             </label>
             <input
               type="text"
-              placeholder="  انتخاب  کنید"
+              onClick={() => setShowMenu(!showMenu)}
+              placeholder="انتخاب  کنید"
               value={selectedItem?.Name}
-              className="w-[320px] sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
+              className="w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
             <div
               className={
@@ -290,7 +307,7 @@ const Home = () => {
                 viewBox="0 0 16 9"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                onClick={handlerIconClick}
+                onClick={() => setShowMenu(!showMenu)}
               >
                 <path
                   d="M1.35352 1.41699L8.38281 8.44629L15.4121 1.41699"
@@ -748,12 +765,12 @@ const Home = () => {
           <h2 className="text-[13px]  text-[#003666] my-3 m-auto px-4">
             موقعیت مکانی را روی نقشه مشخص کنید.
           </h2>
-          <div className=" sm:w-[1080px] w-[350px] mb-10">
-            {/* <NeshanM /> */}
+          <div className="">
+            <NeshanM />
 
             {/* <img src={map} /> */}
           </div>
-          <div className="flex gap-3 my-3">
+          <div className="flex gap-3 mt-10">
             <div>
               <svg
                 width="24"
@@ -801,14 +818,14 @@ const Home = () => {
                 <path d="M18 12H19.5" stroke="#157B96" strokeLinecap="round" />
               </svg>
             </div>
-            <h2 className="text-[#003666] text-[16px] font-bold">
+            <h2 className="text-[#003666]  text-[16px] font-bold">
               برای افزودن لوگوی خود اینجا کلیک کنید
             </h2>
           </div>
         </div>
         {/* send button */}
 
-        <div className="flex items-center justify-center gap-10 mb-10 sm:justify-end sm:-ml-[20px] sm:-mt-14">
+        <div className="flex   items-center justify-center gap-10 py-5 h-full sm:justify-end sm:-ml-[20px] sm:-mt-14">
           <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
             صفحه قبل
           </button>

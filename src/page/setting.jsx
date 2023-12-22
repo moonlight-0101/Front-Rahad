@@ -9,7 +9,7 @@ import Button from "../components/button/Button";
 
 const Setting = () => {
   return (
-    <div className='min-w-[360px] p-[1rem] sm:p-0  items-center justify-center sm:justify-start flex-col sm:flex-row m-auto  sm:max-w-[1280px] flex '>
+    <div className='min-w-[360px] p-[1rem] sm:p-0 h-full  items-center justify-center sm:justify-start flex-col sm:flex-row m-auto  sm:max-w-[1280px] flex '>
       <div className="sm:-mr-4 sm:-mt-20">
 
       <Menu/>
@@ -61,7 +61,7 @@ const Setting = () => {
                   key={item.name}
                   class="flex  items-center justify-between w-[100px] sm:w-[150px] mt-10"
                 >
-                  <label className="text-[12px]  sm:text-[16px] font-medium text-[#003666] dark:text-gray-300">
+                  <label className="text-[12px]  sm:text-[16px] font-medium text-[#003666] ">
                     {item.name}
                   </label>
                   <input type="checkbox" value="" />
@@ -75,8 +75,8 @@ const Setting = () => {
                   key={item.name}
                   class="flex items-center justify-between w-[100px] sm:w-[150px] mt-10"
                 >
-                  <label className="text-[12px] sm:text-[16px]  font-medium text-[#003666] dark:text-gray-300">
-                    {item.name}{" "}
+                  <label className="text-[12px] sm:text-[16px]  font-medium text-[#003666] ">
+                    {item.name}
                   </label>
                   <input type="checkbox" value="" />
                 </div>
@@ -84,7 +84,7 @@ const Setting = () => {
             </div>
           </div>
         </div>
-        <div className="sm:mt-[250px] mt-[90px]">
+        <div className="sm:mt-[250px] mt-[80px]">
           <Button />
         </div>
       </div>
