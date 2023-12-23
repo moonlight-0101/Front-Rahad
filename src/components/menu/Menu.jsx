@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import icon from "../../image/icon.svg"
 import search from "../../image/search-normal.svg";
 import logo from "../../image/logo.svg";
@@ -6,17 +6,16 @@ import SideBar from '../sidebar/SideBar';
 import close from "../../image/close.svg"
 // import { Calendar } from 'react-multi-date-picker';
 import DataDay from "../date-picker/DataDay";
-// let today = new Date();
-// گرفتن تاریخ امروز
-// let day = today.toLocaleDateString("fa-IR")
-// let month = today.toLocaleDateString("fa-IR") ; 
-// let year = today.getFullYear();
-
-// نمایش تاریخ به صورت رشته
-// console.log(`امزوز: ${month}`);
  
 const Menu = () => {
     const [MenuOpen, setMenuOpen] = useState(false)
+    useEffect(() => {
+      if (MenuOpen) {
+        document.body.style.touchAction = 'none';
+      } else {
+        document.body.style.touchAction = 'auto';
+      }
+    }, [MenuOpen]);
     const handlerButtonClick = () => {
       setMenuOpen(!MenuOpen);
     };
@@ -55,7 +54,7 @@ const Menu = () => {
       </div>
   </div>
   </div>
-      <div className='m-auto sm:hidden '>
+      <div className="flex items-center justify-center  sm:hidden">
         <DataDay/>
       </div>
   </>

@@ -107,7 +107,7 @@ const Home = () => {
         }
       );
       if (response.status === 200) {
-        navigateTo("/addimage");
+        navigateTo("/setting");
       }
       console.log("oooooooo", response);
     } catch (error) {
@@ -223,9 +223,11 @@ const Home = () => {
             <label className="text-[#003666] text-[16px] font-medium mr-2">
               نوع اقامتگاه
             </label>
+            <div  onClick={() => setShowLocation(!showLocation)}>
+
             <input
               type="text"
-              onClick={() => setShowLocation(!showLocation)}
+             
               placeholder="  انتخاب  کنید"
               value={location?.Name}
               // value={"هتل آپارتمان"}
@@ -235,8 +237,9 @@ const Home = () => {
                   type_residence: e.target.value,
                 }))
               }
-              className="w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
+              className="w-[320px] pointer-events-none  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
+            </div>
             <div
               className={
                 showLocation
@@ -270,13 +273,15 @@ const Home = () => {
             >
               <div className="text-[17px] text-[#003666]   pt-6 flex flex-col">
                 {locations.map((item) => (
-                  <li
-                    key={item.id}
-                    className="text-[14px] pr-4 w-full py-2.5  cursor-pointer hover:bg-[#C2C7CC]"
-                    onClick={() => handlerLocation(item)}
-                  >
+                  <div  onClick={() => setShowLocation(!showLocation)}>
+                    <li
+                      key={item.id}
+                      className="text-[14px] pr-4 w-full py-2.5  cursor-pointer hover:bg-[#C2C7CC]"
+                      onClick={() => handlerLocation(item)}
+                    >
                     {item.Name}
                   </li>
+                  </div>
                 ))}
               </div>
             </div>
@@ -287,13 +292,15 @@ const Home = () => {
             <label className="text-[#003666] text-[16px] font-medium mr-2">
               درجه اقامتگاه
             </label>
+            <div  onClick={() => setShowMenu(!showMenu)}>
+
             <input
               type="text"
-              onClick={() => setShowMenu(!showMenu)}
               placeholder="انتخاب  کنید"
               value={selectedItem?.Name}
-              className="w-[320px]  sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
+              className="w-[320px]  pointer-events-none sm:w-[420px] mt-2 h-[53px] border text-[14px] pr-2 border-[#C2C7CC] rounded-[10px] outline-none"
             />
+            </div>
             <div
               className={
                 showMenu
@@ -324,18 +331,20 @@ const Home = () => {
                   : "hidden"
               }
             >
-              <div className="text-[17px] text-[#003666] mr-4 sm:pr-10 pt-6 flex flex-col gap-5">
+              <div className="text-[17px] text-[#003666] mr-4 sm:pr-2 pt-6 flex flex-col gap-5">
                 {Degree.map((item) => (
-                  <li
+                  <div  onClick={() => setShowMenu(!showMenu)} >
+                    <li
                     key={item.id}
-                    className="cursor-pointer"
+                    className="cursor-pointer sm:w-[380px] "
                     onClick={() => handleItemClick(item)}
                   >
                     {item.Name}
-                  </li>
+                   </li>
+                  </div>
                 ))}
               </div>
-              <div className="mt-6 ml-3">
+              <div className="mt-6 -mr-[170px] pl-2">
                 <span>
                   <svg
                     width="152"

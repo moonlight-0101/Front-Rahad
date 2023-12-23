@@ -2,8 +2,8 @@ import React from "react";
 
 const SideBar = () => {
   return (
-    <div className="flex   items-center  m-auto">
-      <div className="flex   flex-col  fixed mt-14 sm:mt-0 px-[1rem]  sm:w-[230px] w-[50vh]  mr-2  items-center bg-white h-full  gap-5  sm:gap-4  sm:static  top-[70px] -right-[70px]">
+    <div className="flex   items-center  m-auto justify-center">
+      <div className="flex   flex-col  bg-white fixed mt-14 sm:mt-0 px-[2rem]  sm:w-[230px] w-[63vh]  mr-2  items-center  h-full  sm:gap-4  sm:static  top-[70px] -right-[65px]">
         <div className="flex gap-10 items-center justify-around sm:justify-center  w-full sm:w-[15vw]  sm:mt-6 group  h-[70px] transition-al duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]">
           <div className="flex gap-3 sm:gap-8">
           <span>
@@ -51,7 +51,7 @@ const SideBar = () => {
       stroke-linecap="round"
       stroke-linejoin="round"
     />
-  </svg>
+         </svg>
           </span>
           <h2 className="text-[12px] sm:text-[15px] text-[#1E202C] group-hover:text-white">
             بک آفیس
@@ -485,7 +485,7 @@ const SideBar = () => {
           </h2>
         </div>
 
-        <div className="flex gap-3  sm:-mr-4  group items-center  sm:justify-center w-full sm:w-[15vw]   mr-[70px] pr-10 sm:pr-0   h-[70px] transition-all duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]">
+        <div className="flex gap-3 -mt-2 sm:mt-0  sm:-mr-4  group items-center  sm:justify-center w-full sm:w-[15vw]   mr-[70px] pr-10 sm:pr-0   h-[70px] transition-all duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]">
           <span>
             <svg
               width="24"

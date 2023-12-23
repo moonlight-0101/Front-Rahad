@@ -20,7 +20,7 @@ const DataDay = () => {
  
 
   return (
-    <div className=" mt-2 w-full sm:hidden gap-14 flex items-center  ">
+    <div className=" mt-1 w-full sm:hidden gap-14 flex items-center justify-center  ">
       <button
         onClick={goToNextDay}
         className="border border-[#DCEEF3] w-[32px] h-[32px] flex items-center justify-center"
