@@ -46,7 +46,7 @@ const Login = () => {
        
         )
         if(response.status===200){
-            const tokens=response.data
+        const tokens=response.data
         const token=tokens.data.Authorization
         const cookie=new Cookies()
         cookie.set("token",token)

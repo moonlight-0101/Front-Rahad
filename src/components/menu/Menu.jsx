@@ -54,7 +54,7 @@ const Menu = () => {
       </div>
   </div>
   </div>
-      <div className="flex items-center justify-center  sm:hidden">
+      <div className="flex items-center justify-center bg-green-200  sm:hidden">
         <DataDay/>
       </div>
   </>

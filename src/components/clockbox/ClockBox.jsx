@@ -100,6 +100,7 @@
 import React, { useEffect, useState } from "react";
 
 const ClockBox = ({ mainTime, setTime }) => {
+    const [timeFormat, setTimeFormat] = useState("pm"); // pm or am
     const handelTimeAction = ({ event, mode }) => {
         const mainEventTime = event.target.value;
         // Minute
@@ -109,18 +110,13 @@ const ClockBox = ({ mainTime, setTime }) => {
         // Hour
         if ((mode === "hour" && /^(0?\d|1\d|2[0-3])$/.test(mainEventTime)) || mainEventTime === "") {
             setTime((prev) => ({ ...prev, hour: mainEventTime }));
+            if (parseInt(mainEventTime) >= 12) {
+                setTimeFormat("am");
+            } else {
+                setTimeFormat("pm");
+            }
         }
     };
-// const ClockBox = ({ mainTime, setTime }) => {
-//  const [timeFormat, setTimeFormat] = useState("pm");
-// const handelInputChange = ({ value, timeType }) => {
-//  setTime((prev) => ({ ...prev, [timeType]: value }));
-// if (parseInt(value) >= 12 && timeType === "hour") {
-// setTimeFormat("am");
-// } else {
-//  setTimeFormat("pm");
-//  }
-//  };
     return (
         <div className="w-[320px] sm:w-[420px] rounded-[9px] p-[10px] flex flex-row-reverse items-center gap-5 justify-center  border border-[rgb(162,175,184)]">
             <div>
@@ -148,7 +144,7 @@ const ClockBox = ({ mainTime, setTime }) => {
                 <div className=" text-left ml-2 text-[#49454F] text-[12px]">دقیقه</div>
             </div>
             <div className="w-[52px] -mt-2 rounded-sm h-[56px] border border-black/10 flex items-center justify-center text-[22px]">
-                {/* {timeFormat} */}
+                {timeFormat}
             </div>
         </div>
     );

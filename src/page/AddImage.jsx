@@ -1,10 +1,10 @@
 import React from "react";
-// import ColorBox from "../components/colorbox/ColorBox";
-// import SearchBox from "../components/searchbox/SearchBox";
-// import { hotel, sidebardata } from "../data";
-// import Menu from "../components/menu/Menu";
-// import Label from "../components/Label";
-// import Button from "../components/button/Button";
+import ColorBox from "../components/colorbox/ColorBox";
+import SearchBox from "../components/searchbox/SearchBox";
+import { hotel } from "../data";
+import Menu from "../components/menu/Menu";
+import Label from "../components/Label";
+import Button from "../components/button/Button";
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
@@ -21,18 +21,18 @@ const AddImage = () => {
     <div className="m-auto">
        <div className='  min-w-[360px] m-auto p-[10px] sm:p-0 flex-col items-center h-full sm:justify-start justify-center sm:flex-row px-8 sm:px-0   sm:m-0  sm:max-w-[1280px] sm:flex  relative  '>
         <div className=" sm:-mt-20">
-        {/* <Menu /> */}
+        <Menu />
         </div>
       {/* topbar */}
       <div className="sm:w-[940px] h-full  ">
         <div>
           <div className="flex items-center justify-center sm:block">
-          {/* <ColorBox /> */}
+          <ColorBox />
           </div>
           {/* label */}
           <div className="flex items-center justify-center sm:justify-between mb-10">
             <div className="flex justify-center  gap-3 items-center">
-              {/* <Label /> */}
+              <Label />
               <div className="hidden sm:flex items-center justify-center gap-2">
                 <div>
                   <svg
@@ -76,7 +76,7 @@ const AddImage = () => {
                 </h3>
               </div>
             </div>
-            {/* <SearchBox /> */}
+            <SearchBox />
           </div>
         </div>
 
@@ -96,7 +96,7 @@ const AddImage = () => {
               <div className="">
 
                  <Swiper
-                 className=' flex w-[50vw] bg-red-700   sm:w-[643px] h-[230px] mt-6 justify-center items-center overflow-visible '
+                 className=' flex w-[89vw]   sm:w-[643px] h-[210px] mt-5 justify-center items-center overflow-visible '
                  modules={[Navigation, Pagination, Scrollbar, A11y]}
                  spaceBetween={30}
                  slidesPerView={1}
@@ -152,7 +152,7 @@ const AddImage = () => {
               </div>
            
             {/* slider */}
-            <div className="flex sm:flex-row sm:gap-8 gap-4 flex-col   -mr-[200px] sm:mr-0 left-0  static">
+            <div className="flex sm:flex-row sm:gap-8 gap-4 flex-col mt-6   -mr-[200px] sm:mr-0 left-0  static">
               <div className="flex  mr-10 sm:mr-0 items-center gap-2 justify-center">
                 <span>
                   <svg
@@ -233,7 +233,7 @@ const AddImage = () => {
         </div>
 
         <div className="sm:mt-[250px] mt-[100px]">
-          {/* <Button /> */}
+          <Button />
         </div>
       </div>
     </div>

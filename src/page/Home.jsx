@@ -151,7 +151,8 @@ const Home = () => {
       Degree.filter((item) => item.id === userData.degree_residence).at(0)
     );
     setLocation(
-      locations.filter((item) => item.Name === userData.type_residence).at(0)
+      locations.filter((item) => item.id
+       === userData.type_residence).at(0)
     );
     setRoomDeliveryTime({
       hour: getArrayTime(userData.room_delivery_time)?.at(0),

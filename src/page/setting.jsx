@@ -6,12 +6,16 @@ import { hotel } from "../data";
 import Menu from "../components/menu/Menu";
 import Label from "../components/Label";
 import Button from "../components/button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
+  const navigateTo = useNavigate();
+  const nextPage=()=>{
+    navigateTo('/addimage')
+  }
   return (
     <div className='min-w-[360px] p-[1rem] sm:p-0 h-full  items-center justify-center sm:justify-start flex-col sm:flex-row m-auto  sm:max-w-[1280px] flex '>
       <div className="sm:-mr-4 sm:-mt-20">
-
       <Menu/>
       </div>
 
@@ -85,7 +89,15 @@ const Setting = () => {
           </div>
         </div>
         <div className="sm:mt-[250px] mt-[80px]">
-          <Button />
+        <div className="flex items-center justify-center gap-10 mb-10 sm:justify-end sm:-ml-[20px] sm:-mt-14">
+        <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
+          صفحه قبل
+        </button>
+        <button className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]" onClick={nextPage}>
+          صفحه بعد
+        </button>
+      </div>
+    
         </div>
       </div>
     </div>
