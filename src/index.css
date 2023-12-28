@@ -20,9 +20,7 @@
 
 
 
-element.style{
-  background-color: #239380;
-}
+
 
 .swiper-button-prev,
 .swiper-button-next {
@@ -53,7 +51,7 @@ element.style{
   }
   .swiper-slide {
     visibility: hidden;
-     /* flex-shrink:0; */
+     flex-shrink:0;
   }
 }
 
@@ -80,16 +78,9 @@ body{
   font-family: "Light";   
   src:url("./font/IRANSansX-Medium.woff") format("truetype");
 }
-/* .custom-checkbox input[type='checkbox'] {
-  display: none;
-} */
-
-/*  */
+ 
 
 
-/* input[type=checkbox] {
-  transform: scale(1.5);
-} */
 
 input[type=checkbox] {
   font-size: 14px;
@@ -103,14 +94,13 @@ input[type=checkbox]::after {
   display:flex;
   justify-items: center;
   align-items: center;
-  color: #239380;
+  color: #2393B0 !important;
   width: 20px;
   height: 20px;
   visibility: visible;
-  border: 1px solid #2393B0;
+  border: 2px solid #097693;
   border-radius: 5px;
- 
-
+  
 }
 
 input[type=checkbox]:checked:after,

@@ -70,7 +70,7 @@ const Login = () => {
                 </div> */}
               </div>
                 <div className=''>
-                    <h3 className='hidden sm:block  w-[390px] h-[38px] text-[#003666] font-[800px] mr-10 text-[26px] mt-[134px]'>به نرم افزار هتلداری رها خوش آمدین</h3>
+                    <h3 className='hidden sm:block  w-[390px] h-[38px] text-[#003666] font-[800px] mr-10 text-[26px] mt-[134px]'>به نرم افزار هتلداری رهاد خوش آمدین</h3>
                     <div className='flex items-center justify-center flex-col'>
 
                     <img src={img} className='sm:hidden  text-[#2393B0]  text-center text-[60px] w-[145px] h-[145px]'/>

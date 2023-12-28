@@ -5,10 +5,9 @@ import { hotel } from "../data";
 import Menu from "../components/menu/Menu";
 import Label from "../components/Label";
 import Button from "../components/button/Button";
-
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from "react-router-dom";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,9 +16,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const AddImage = () => {
+  const navigateTo = useNavigate();
+  // const preNext=()=>{
+  //   navigateTo('/home')
+  // }
   return (
     <div className="m-auto">
-       <div className='  min-w-[360px] m-auto p-[10px] sm:p-0 flex-col items-center h-full sm:justify-start justify-center sm:flex-row px-8 sm:px-0   sm:m-0  sm:max-w-[1280px] sm:flex  relative  '>
+       <div className='  min-w-[360px] m-auto p-[10px] sm:p-0 flex-col items-center h-full sm:justify-start justify-center sm:flex-row px-8 sm:px-0   sm:m-0  sm:w-full sm:flex  relative  '>
         <div className=" sm:-mt-20">
         <Menu />
         </div>
@@ -96,7 +99,7 @@ const AddImage = () => {
               <div className="">
 
                  <Swiper
-                 className=' flex w-[89vw]   sm:w-[643px] h-[210px] mt-5 justify-center items-center overflow-visible '
+                 className=' flex w-[89vw]   sm:w-[643px] h-[210px] mt-5 justify-center items-center overflow-hidden sm:overflow-visible '
                  modules={[Navigation, Pagination, Scrollbar, A11y]}
                  spaceBetween={30}
                  slidesPerView={1}
@@ -142,14 +145,49 @@ const AddImage = () => {
                       />
                     </svg>
                   </SwiperSlide>
-                  <SwiperSlide className="flex items-center justify-center">
-                    <h2>opop</h2>
+                  <SwiperSlide className="flex  items-center justify-center">
+                    <svg
+                      width="52"
+                      height="53"
+                      viewBox="0 0 52 53"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.9161 40.0769V22.3994L12 28.2919"
+                        stroke="#A2AFB8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M17.918 22.3994L23.8341 28.2919"
+                        stroke="#A2AFB8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M47.6673 21.9825V32.7726C47.6673 43.5627 43.334 47.8788 32.5007 47.8788H19.5007C8.66732 47.8788 4.33398 43.5627 4.33398 32.7726V19.8244C4.33398 9.03431 8.66732 4.71826 19.5007 4.71826H30.334"
+                        stroke="#A2AFB8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M39.0007 21.9825C32.5007 21.9825 30.334 19.8244 30.334 13.3504V4.71826L47.6673 21.9825H39.0007Z"
+                        stroke="#A2AFB8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                   </SwiperSlide>
                 </Swiper>
                
 
-                {/* <div className=' w-[1380px] h-full bg-black/80 absolute top-0 left-0'></div> */}
               </div>
+                {/* <div className=' w-[1380px] h-full bg-black/75 absolute top-0 left-0'></div> */}
            
             {/* slider */}
             <div className="flex sm:flex-row sm:gap-8 gap-4 flex-col mt-6   -mr-[200px] sm:mr-0 left-0  static">
@@ -233,7 +271,14 @@ const AddImage = () => {
         </div>
 
         <div className="sm:mt-[250px] mt-[100px]">
-          <Button />
+        <div className="flex items-center justify-center gap-10 mb-10 sm:justify-end sm:-ml-[20px] sm:-mt-14">
+        <button onClick={()=> navigateTo('/setting')} className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
+          صفحه قبل
+        </button>
+        <button className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]">
+          صفحه بعد
+        </button>
+      </div>
         </div>
       </div>
     </div>

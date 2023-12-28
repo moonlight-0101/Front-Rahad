@@ -839,6 +839,9 @@ const Home = () => {
           <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
             صفحه قبل
           </button>
+          <div>
+            
+          </div>
           <button
             onClick={handleFormSubmit}
             className="w-[138px] h-[48px] text-white bg-[#23B05B] rounded-[10px] text-[16px]"
