@@ -54,6 +54,7 @@ const Location = () => {
         </div>
 
         <div className="sm:mr-8 px-[6px] ">
+          {/* //اینجا دکمه هان */}
           <div className={` ${deleteLocation ?"flex-col sm:flex-row":"" } mb-10 flex justify-between  sm:mb-20} `}>
             <div>
             <h1 className="text-[#003666] mr-2 sm:mr-0  text-[25px] -mt-10"> مکانهای مهم اطراف هتل  </h1>
@@ -71,13 +72,6 @@ const Location = () => {
                     </span>
                     <p className= {`${deleteLocation ?"block px-3 sm:px-0":"hidden"} sm:block text-[#FB2047] text-[17px]`}>{deleteLocation ?"حذف موارد انتخابی":"حذف مکان"} </p>
                 </button>
-                {/* <div  className={`${deleteLocation && " bg-red-500 block"}`}>
-                    <svg width="26" height="26" viewBox="0 0 26 26" fill="red" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M23.8612 12.9999C23.8612 7.117 19.0479 2.30371 13.165 2.30371C7.28204 2.30371 2.46875 7.117 2.46875 12.9999C2.46875 18.8828 7.28204 23.6961 13.165 23.6961C19.0479 23.6961 23.8612 18.8828 23.8612 12.9999Z" stroke="#003666" stroke-width="1.60443" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8.88672 13H17.4437" stroke="#003666" stroke-width="1.60443" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.1641 17.2786V8.72168" stroke="#003666" stroke-width="1.60443" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    </div> */}
                 <button className={`flex border border-[#003666] px-2 sm:px-6 py-2 gap-2 -mt-10 rounded-md`}>
                     <span className={deleteLocation && " hidden"}>
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,6 +84,7 @@ const Location = () => {
                     <p className={` sm:block ${deleteLocation ?"block px-6 sm:px-0":"hidden"} text-[#003666] text-[17px]`}>{deleteLocation ? "لغو":"افزودن مکان جدید"}</p>                </button>
             </div>
           </div>
+          {/* // (*:*)اینمم همون کاوننت کم رنگه */}
           <div className="flex sm:mr-10 overflow-x-scroll no-scrollbar">
           <div className=" flex  flex-col  px-[1rem] ">
           <div className="flex items-center justify-center gap-10 mt-4 ">
@@ -153,7 +148,7 @@ const Location = () => {
             <Place/>
             <Place/> */}
           </div>
-        </div>
+          </div>
 
           </div>
         <div className="sm:mt-[250px] mt-[80px]">
