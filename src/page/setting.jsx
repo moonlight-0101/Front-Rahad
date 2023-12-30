@@ -30,7 +30,7 @@ const Setting = () => {
           <div className="flex items-center justify-between mb-10">
             <div className="flex justify-center sm:mr-5 gap-3 items-center">
               <Label />
-              <div className="mt-2 flex items-center justify-center gap-2">
+              <div className="mt-2 sm:mt-0 flex items-center justify-center gap-2">
                 <div>
                   <svg
                     width="7"
@@ -47,8 +47,8 @@ const Setting = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-[#087599] text-[14px] font-thin">
-                  افزودن امکانات{" "}
+                <h3 className="text-[#087599]  text-[14px] font-thin">
+                  افزودن امکانات
                 </h3>
               </div>
             </div>

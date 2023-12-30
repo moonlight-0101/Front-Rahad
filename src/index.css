@@ -108,5 +108,5 @@ input[type=checkbox]:checked::after {
   content: "\2714";
   padding: -5px;
   font-weight: bold;
-  padding-right: 3px;
+  padding-right: 1px;
 }
