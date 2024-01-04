@@ -28,7 +28,6 @@ const Login = () => {
            setType('password')
         }
    }
-    console.log(UserName,Password);
     const handelSubmit=async (event)=>{
         setSubmit(true)
         event.preventDefault()

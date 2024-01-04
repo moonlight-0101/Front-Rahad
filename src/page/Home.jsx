@@ -41,6 +41,32 @@ const Home = () => {
     Language: "",
   });
 
+   const handleFileUpload=async(event)=>{
+    event.preventDefault()
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+    if(file.size <= 6 * 1024 * 1024){
+      const formData = new FormData();
+      formData.append('logo', file);
+     
+     
+      try{
+        const response=await axios.post("https://backendrahad.pythonanywhere.com/ManagementResidenceLogo/",formData,{
+          headers:{
+            "Content-Type": "multipart/form-data",
+            Authorization:login_token
+          }
+        }
+        )
+        console.log("mahtabb",response);
+      } catch(error){
+        console.log("با خطا مواجه شد",error);
+      }
+    }
+    else{
+        "فرمت وارد شده صحیح نیست"
+    }
+   }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,7 +80,6 @@ const Home = () => {
           }
         );
         if (response.data) {
-          console.log("oooooooo", response);
           setUserData({
             name_of_residence: response.data.name_of_residence,
             type_residence: response.data.type_residence,
@@ -109,7 +134,6 @@ const Home = () => {
       if (response.status === 200) {
         navigateTo("/setting");
       }
-      console.log("oooooooo", response);
     } catch (error) {
       setError("در ارسال اطلاعات مشکلی رخ داده است");
     }
@@ -128,23 +152,6 @@ const Home = () => {
     setSelectedItem(item);
   };
 
-  //   setSelectedItem(
-  //     Degree.filter((item) => item.id === userData.degree_residence).at(0)
-  //   );
-  //   setLocation(
-  //     locations.filter((item) => item.id === userData.type_residence).at(0)
-  //   );
-  //   setRoomDeliveryTime({
-  //     hour: getArrayTime(userData.room_delivery_time)?.at(0),
-  //     min: getArrayTime(userData.room_delivery_time)?.at(1),
-  //     sec: getArrayTime(userData.room_delivery_time)?.at(2),
-  //   });
-  //   setRoomCheckoutTime({
-  //     hour: getArrayTime(userData.room_checkout_time)?.at(0),
-  //     min: getArrayTime(userData.room_checkout_time)?.at(1),
-  //     sec: getArrayTime(userData.room_checkout_time)?.at(2),
-  //   });
-  // }, [userData]);
 
   useEffect(() => {
     setSelectedItem(
@@ -165,7 +172,6 @@ const Home = () => {
       sec: getArrayTime(userData.room_checkout_time)?.at(2),
     });
   }, [userData]);
-  console.log(location);
 
   return (
     <div className=" min-w-[360px] m-auto  px-[1rem] sm:px-0 flex  sm:justify-start justify-center flex-col sm:flex-row   sm:m-0 sm:mr-1 sm:min-w-[1280px]   ">
@@ -274,9 +280,8 @@ const Home = () => {
             >
               <div className="text-[17px] text-[#003666]   pt-6 flex flex-col">
                 {locations.map((item) => (
-                  <div  onClick={() => setShowLocation(!showLocation)}>
+                  <div  key={item.id}  onClick={() => setShowLocation(!showLocation)}>
                     <li
-                      key={item.id}
                       className="text-[14px] pr-4 w-full py-2.5  cursor-pointer hover:bg-[#C2C7CC]"
                       onClick={() => handlerLocation(item)}
                     >
@@ -334,9 +339,8 @@ const Home = () => {
             >
               <div className="text-[17px] text-[#003666] mr-4 sm:pr-2 pt-6 flex flex-col gap-5">
                 {Degree.map((item) => (
-                  <div  onClick={() => setShowMenu(!showMenu)} >
+                  <div key={item.id}  onClick={() => setShowMenu(!showMenu)} >
                     <li
-                    key={item.id}
                     className="cursor-pointer sm:w-[380px] "
                     onClick={() => handleItemClick(item)}
                   >
@@ -780,9 +784,9 @@ const Home = () => {
 
             {/* <img src={map} /> */}
           </div>
-          <div className="flex gap-3 mt-10">
-            <div>
-              <svg
+          <form>
+           <label htmlFor="file-upload" className="flex gap-3 mt-10">
+           <svg
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -826,12 +830,19 @@ const Home = () => {
                   mask="url(#path-7-inside-1_319_1688)"
                 />
                 <path d="M18 12H19.5" stroke="#157B96" strokeLinecap="round" />
-              </svg>
-            </div>
-            <h2 className="text-[#003666]  text-[16px] font-bold">
+              </svg> 
+             <h2 className="text-[#003666]  text-[16px] font-bold">
               برای افزودن لوگوی خود اینجا کلیک کنید
             </h2>
-          </div>
+               </label>
+              <input
+               type="file"
+               id="file-upload"
+               style={{ display: "none" }}
+               onChange={handleFileUpload}/>
+
+           
+          </form>
         </div>
         {/* send button */}
 
