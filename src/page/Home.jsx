@@ -689,7 +689,7 @@ const Home = () => {
             </div>
           </div>
           <div>
-            <div className="w-[320px] h-[152px] flex items-center justify-center  ">
+            <div className="w-[320px] h-[102px] flex items-center justify-center  ">
               <div>
                 <label className="text-[#003666] text-[16px] font-medium mr-2">
                   آدرس{" "}
@@ -846,7 +846,7 @@ const Home = () => {
         </div>
         {/* send button */}
 
-        <div className="flex   items-center justify-center gap-10 py-5 h-full sm:justify-end sm:-ml-[20px] sm:-mt-14">
+        <div className="flex   items-center justify-center gap-4 py-5 h-full sm:justify-end  sm:-mt-14">
           <button className="w-[138px] h-[48px] text-[#FB2047] border border-[#FB2047] rounded-[10px] text-[16px]">
             صفحه قبل
           </button>

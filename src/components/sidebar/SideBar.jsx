@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import UnderMenu from "../undermenu/UnderMenu";
 
 const SideBar = () => {
+  const [bg,setBg]=useState(false)
+  const [Undermenu,setUnderMenu]=useState(false)
   return (
     <div className="flex   items-center  m-auto justify-center">
-      <div className="flex   flex-col  bg-white fixed mt-14 sm:mt-0 px-[2rem]  sm:w-[230px] w-[63vh]  mr-2  items-center  h-full  sm:gap-4  sm:static  top-[70px] -right-[65px]">
-        <div className="flex gap-10 items-center justify-around sm:justify-center  w-full sm:w-[15vw]  sm:mt-6 group  h-[70px] transition-al duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]">
+      <div 
+      onClick={()=>setBg(!bg)}
+      className={`flex   flex-col  bg-white fixed mt-14 sm:mt-0 px-[2rem]  sm:w-[230px] w-[63vh]  mr-2  items-center  h-full  sm:gap-4  sm:static  top-[70px] -right-[65px]`}>
+        <div className={`flex gap-10 items-center justify-around sm:justify-center  w-full sm:w-[15vw]  sm:mt-6   h-[70px] transition-al duration-500   rounded-[10px] ${bg ?"bg-gradient-to-r from-[#076E8A] to-[#2393B0]":""}`}>
           <div className="flex gap-3 sm:gap-8">
             <span>
               <svg
@@ -12,7 +17,7 @@ const SideBar = () => {
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="stroke-[#157B96] group-hover:stroke-white"
+                className={`stroke-[#157B96]  ${bg && "stroke-white"}`}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -53,7 +58,7 @@ const SideBar = () => {
                 />
               </svg>
             </span>
-            <h2 className="text-[12px] sm:text-[15px] text-[#1E202C] group-hover:text-white">
+            <h2 className={`text-[12px] sm:text-[15px] text-[#1E202C]  ${bg && "text-white"} `}>
               بک آفیس
             </h2>
           </div>
@@ -68,7 +73,7 @@ const SideBar = () => {
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
-                className="group-hover:fill-white"
+                className={`${bg && "fill-white"}`}
                 d="M12.7559 5.086C12.4305 4.77683 11.9028 4.77683 11.5774 5.086L6.99408 9.44017C6.66864 9.74933 6.66864 10.2506 6.99408 10.5598L11.5774 14.9139C11.9028 15.2231 12.4305 15.2231 12.7559 14.9139C13.0814 14.6048 13.0814 14.1035 12.7559 13.7943L8.76184 9.99996L12.7559 6.20559C13.0814 5.89642 13.0814 5.39516 12.7559 5.086Z"
                 fill="#087592"
               />
@@ -262,7 +267,7 @@ const SideBar = () => {
               تنظیمات
             </h2>
           </div>
-          <span>
+          <span onClick={()=>setUnderMenu(!Undermenu)}>
             <svg
               width="20"
               height="20"
@@ -279,6 +284,7 @@ const SideBar = () => {
               />
             </svg>
           </span>
+          {Undermenu && <UnderMenu/>}
         </div>
         <div className="flex gap-7 items-center justify-around sm:justify-center w-full sm:w-[15vw]   px-2  group  h-[70px] transition-al duration-500 hover:bg-gradient-to-r from-[#076E8A] to-[#2393B0] rounded-[10px]">
           <div className="flex gap-3 sm:gap-6">

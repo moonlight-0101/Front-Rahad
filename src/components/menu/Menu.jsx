@@ -37,14 +37,14 @@ const Menu = () => {
       </div>
     <div
       className={`
-        ${MenuOpen ? " z-20  " : "hidden relative sm:block"}  -mt-[18px] border-l  border-[#F1F6FC]
+        ${MenuOpen ? " z-20" : "hidden relative sm:block"}  -mt-[18px] border-l  border-[#F1F6FC]
       `}
     >
       
     
       <div className="hidden sm:flex mt-8 z-50 mb-10 w-[250px] h-[53px]">
         
-        <div className=" sm:mr-10">
+        <div className=" sm:mr-10 sm:mt-8">
           <img src={logo} className='w-[252px] h-[75px]'/>
         </div>
       </div>
