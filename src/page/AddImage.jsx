@@ -35,11 +35,11 @@ const AddImage = () => {
     const login_token = cookies.get("token");
     const [state, setState] = useState(false);
     const [receivedImages, setReceivedImages] = useState([]);
-    receivedImages.forEach((image) => {
-        if (image !== null) {
-            setImages((prevImages) => [image, ...prevImages]);
-        }
-    });
+    // receivedImages.forEach((image) => {
+    //     if (image !== null) {
+    //         setImages((prevImages) => [image, ...prevImages]);
+    //     }
+    // });
     useEffect(() => {
         axios.get(
             "https://backendrahad.pythonanywhere.com/ResidenceImagesView/",
@@ -49,12 +49,11 @@ const AddImage = () => {
                     Authorization: login_token,
                 },
             }
-        );
-        // .then((response) => {
-        //     let receivedImages = Object.values(response.data); // Convert the object to an array
-        //     setReceivedImages(receivedImages);
-        //     setLoading(false);
-        // });
+        )
+        .then((response) => {
+            setImages(Object.values(response.data).filter((image) => image));
+            setLoading(false);
+        });
     }, [login_token]);
     const handleImageUpload = (e) => {
         if (images.length > 12) {
@@ -74,7 +73,7 @@ const AddImage = () => {
     const swiperRef = useRef();
     return (
         <div className="m-auto">
-            <div className=" min-w-[360px] m-auto p-[10px] sm:p-0 flex-col items-center h-full sm:justify-start justify-center sm:flex-row px-8 sm:px-0   sm:m-0  sm:w-full sm:flex  relative  ">
+            <div className=" min-w-[360px] m-auto p-[10px] sm:p-0 flex-col items-center h-full  sm:justify-start justify-center sm:flex-row px-8 sm:px-0   sm:m-0  sm:w-full sm:flex  relative  ">
                 <div className=" sm:-mt-10">
                     <Menu />
                 </div>
@@ -107,8 +106,8 @@ const AddImage = () => {
                                     </div>
                                     <div
                                         className={`${
-                                            OpenModal ? "show" : "hidden"
-                                        } absolute top-0 left-0 bg-black/50 w-full h-full z-20`}
+                                            OpenModal ? "absolute top-0 left-0 bg-black/50 w-full h-full z-20" : "hidden"
+                                        }`}
                                     ></div>
                                     <h3 className="text-[#087599] text-[14px] font-thin">
                                         افزودن امکانات
@@ -145,8 +144,8 @@ const AddImage = () => {
                     <div
                         className={` flex justify-center items-center flex-col`}
                     >
-                        <div className=" mt-12 sm:mt-4 h-[300px] w-[100%]  sm:p-0 sm:w-[918px] sm:h-[430px] sm:border sm:shadow-xl   sm:mr-10 flex items-center justify-center">
-                            <div className="w-[642px] h-[230px]    border border-[#C2C7CC] ">
+                        <div className=" mt-12 sm:mt-4 h-[300px] w-[100%]  sm:p-0 sm:w-[918px] sm:h-[430px] sm:border sm:shadow-xl  px-4 sm:mr-10 flex items-center justify-center">
+                            <div className="w-[90vw] sm:w-[642px] h-[230px]   border border-[#C2C7CC] ">
                                 <div className="flex   justify-between flex-col sm:flex-row ">
                                     <p className="-mt-16 sm:-mt-20 sm:-mr-20 w-full flex items-center justify-center">
                                         <span className="text-[#003666]  text-[14px] sm:text-[16px]">
@@ -157,7 +156,7 @@ const AddImage = () => {
                                             حداکثر 15 عدد باشند )
                                         </span>
                                     </p>
-                                    <div className="w-full sm:w-[30%] -mt-14  mb-3 sm:mb-0 shadow-md">
+                                    <div className="w-full sm:w-[30%] -mt-14  mb-3 sm:mb-0 ">
                                         <label
                                             htmlFor="image"
                                             className="flex  mr-10 sm:mr-0 items-center gap-2 justify-center "
@@ -208,9 +207,9 @@ const AddImage = () => {
 
                                 <div className=" ">
                                     <Swiper
-                                        className={`flex   w-[90%] sm:w-[89vw]   ${
+                                        className={`flex   items-center justify-center w-[50vw] sm:w-full  ${
                                             state
-                                                ? "h-[700px]  !w-[1400px]  absolute top-[70px] left-0   object-contain "
+                                                ? "h-[70vh]  w-[100vw]   absolute top-[60px] left-0   object-contain "
                                                 : ""
                                         } sm:w-[693px] h-[230px]   justify-center  items-center   `}
                                         modules={[Navigation]}
@@ -222,14 +221,18 @@ const AddImage = () => {
                                     >
                                         {images.map((item) => (
                                             <SwiperSlide
+                                            
                                                 key={item}
-                                                className=" flex items-center justify-center"
+                                                className={` flex items-center justify-center`}
                                                 onClick={() => setState(!state)}
                                             >
+                                               
+
                                                 <img
                                                     src={item}
-                                                    className="h-full "
+                                                    className={`${state?"w-[100vw] sm:w-[60vw] absolute sm:top-[60px] h- top-52 sm:left-56 left-0 z-50 h-[450px]":"object-cover h-full"}`}
                                                 />
+                                               
                                             </SwiperSlide>
                                         ))}
                                     </Swiper>
@@ -350,7 +353,7 @@ const AddImage = () => {
                                 <div
                                     className={` ${
                                         state
-                                            ? "block w-[1380px] h-full bg-black/95 absolute top-0 left-0"
+                                            ? "block w-[1380px] h-full bg-black/70 sm:bg-black/95 absolute top-0 left-0"
                                             : "hidden"
                                     } `}
                                 ></div>
@@ -359,10 +362,11 @@ const AddImage = () => {
                                 <div className="flex sm:flex-row sm:gap-8 gap-4 flex-col mt-6   -mr-[200px] sm:mr-0 left-0  static"></div>
                             </div>
                         </div>
+                        <div className={`${OpenModal ?"absolute top-0 left-0 bg-black/70 w-full h-full":"hidden"}`}></div>
                         <div
                             className={`${
                                 OpenModal ? "block z-50" : "hidden"
-                            } bg-white border border-gray-100 shadow-md w-[500px] absolute  bottom-48 z-10 h-[270px] flex items-center justify-center flex-col gap-12`}
+                            } bg-white border border-gray-100 shadow-md rounded-xl h-[40vh] w-[90vw] sm:w-[500px] absolute  bottom-48 z-10 sm:h-[270px] flex items-center justify-center flex-col gap-12`}
                         >
                             <span>
                                 <svg
@@ -420,17 +424,17 @@ const AddImage = () => {
                                     onClick={() =>
                                         setOpenModal((prev) => !prev)
                                     }
-                                    className="px-20 py-3 text-[#076E8A] border-[#076E8A] border rounded-[10px] text-[16px]"
+                                    className="sm:px-20 px-10 py-3 text-[#076E8A] border-[#076E8A] border rounded-[10px] text-[16px]"
                                 >
                                     کنسل
                                 </button>
-                                <button className="px-20 py-3 text-white bg-gradient-to-r from-[#2393B0] to-[#076E8A] rounded-[10px] text-[16px]">
+                                <button className="sm:px-20 px-10 py-3 text-white bg-gradient-to-r from-[#2393B0] to-[#076E8A] rounded-[10px] text-[16px]">
                                     حذف
                                 </button>
                             </div>
                         </div>
                         <div
-                            className={`flex items-center w-full my-10 mt-20   ${
+                            className={`flex items-center w-full my-10 mt-20 sm:pt-0  ${
                                 deleteImages.length
                                     ? " justify-between"
                                     : "justify-end"
@@ -439,9 +443,9 @@ const AddImage = () => {
                             {deleteImages.length ? (
                                 <button
                                     onClick={() =>
-                                        setOpenModal((prev) => !prev)
+                                        setOpenModal(!OpenModal)
                                     }
-                                    className="sm:px-8 px-4 py-3 sm:mr-10 bg-[#C50000] rounded-xl text-white flex flex-row-reverse gap-2"
+                                    className="sm:px-8 px-4 py-3 mr-10 bg-[#C50000] rounded-xl text-white flex flex-row-reverse gap-2"
                                 >
                                     <span>
                                         <svg
@@ -554,7 +558,7 @@ const AddImage = () => {
                                         </svg>
                                     </span>
                                 </button>
-                                <button className="px-20 py-3 text-white bg-gradient-to-r from-[#2393B0] to-[#076E8A] rounded-[10px] text-[16px]">
+                                <button className="sm:px-20 px-10 hover:bg- py-3 text-white bg-gradient-to-r from-[#2393B0] to-[#076E8A] rounded-[10px] text-[16px]">
                                     <div className="flex items-center justify-center gap-2 ">
                                         <p>ادامه</p>
                                         <span>
